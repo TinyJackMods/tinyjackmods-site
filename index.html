@@ -455,14 +455,14 @@
         <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 shadow-xl">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center text-xs text-gray-400">
                 
-                <!-- Кодовый логотип слева, выровненный без лишнего отступа сверху -->
-                <div class="flex items-center justify-start md:col-span-1">
-                    <a href="#home" onclick="navigateTo('home')" class="inline-block">
+                <!-- Увеличенный и сдвинутый влево логотип TJM -->
+                <div class="flex items-center justify-start md:col-span-1 -ml-1">
+                    <a href="#home" onclick="navigateTo('home')" class="block">
                         <img src="tjmlogo.png" 
                              alt="Tiny Jack Mods Logo" 
-                             class="h-10 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
+                             class="h-16 sm:h-20 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
                              onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
-                        <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
+                        <span id="footerFallbackText" class="hidden text-white font-black text-3xl tracking-tighter">TJM</span>
                     </a>
                 </div>
 
@@ -473,7 +473,7 @@
                     <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
                 </div>
 
-                <!-- Соцсети с иконками как на макете -->
+                <!-- Соцсети -->
                 <div class="space-y-1.5 md:col-span-1">
                     <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
                     <div class="flex items-center gap-2">
