@@ -235,7 +235,7 @@
 
                     <div class="border-b border-cardBorder/60 my-2"></div>
 
-                    <!-- Project Card 2: Город Видимых Рифм (GKRLOGO.png) -->
+                    <!-- Project Card 2: Город Видимых Рифм -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
                         <div class="md:col-span-5 h-48 sm:h-56 poster-rhymes rounded-xl overflow-hidden flex items-center justify-center relative group shadow-lg">
                             <img src="GKRLOGO.png" 
@@ -450,31 +450,31 @@
 
     </main>
 
-    <!-- Footer Page Section (Внутри карточки-рамки) -->
+    <!-- Footer Page Section (С увеличенным логотипом TJM) -->
     <footer class="w-full max-w-5xl mx-auto px-4 mt-12 mb-8">
-        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 shadow-xl">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center text-xs text-gray-400">
+        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs text-gray-400">
                 
-                <!-- Увеличенный и сдвинутый влево логотип TJM -->
-                <div class="flex items-center justify-start md:col-span-1 -ml-1">
+                <!-- Крупный логотип TJM слева -->
+                <div class="flex items-center justify-start shrink-0">
                     <a href="#home" onclick="navigateTo('home')" class="block">
                         <img src="tjmlogo.png" 
                              alt="Tiny Jack Mods Logo" 
-                             class="h-16 sm:h-20 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
+                             class="h-20 sm:h-24 w-auto max-w-none object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform origin-left"
                              onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
-                        <span id="footerFallbackText" class="hidden text-white font-black text-3xl tracking-tighter">TJM</span>
+                        <span id="footerFallbackText" class="hidden text-white font-black text-4xl tracking-tighter">TJM</span>
                     </a>
                 </div>
 
                 <!-- Навигация -->
-                <div class="space-y-1 md:col-span-1">
+                <div class="space-y-1">
                     <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
                     <div><button onclick="navigateTo('home'); scrollToProjects();" class="hover:text-white transition-colors">Проекты</button></div>
                     <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
                 </div>
 
                 <!-- Соцсети -->
-                <div class="space-y-1.5 md:col-span-1">
+                <div class="space-y-1.5">
                     <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
                     <div class="flex items-center gap-2">
                         <!-- YouTube -->
@@ -493,13 +493,13 @@
                 </div>
 
                 <!-- Создание сайта -->
-                <div class="space-y-1 md:col-span-1">
+                <div class="space-y-1">
                     <div class="text-gray-400 font-semibold">Создание сайта</div>
                     <a href="https://t.me/puskanyaww" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@puskanyaww</a>
                 </div>
 
                 <!-- Дисклеймер справа -->
-                <div class="text-gray-400 md:text-right md:col-span-1 font-normal">
+                <div class="text-gray-400 md:text-right font-normal">
                     Not associated with<br>Jackbox Games
                 </div>
 
