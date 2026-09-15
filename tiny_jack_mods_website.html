@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Jack Mods — Модификации для Jackbox Party Pack</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0b0d',
+                        cardBg: '#151518',
+                        cardHover: '#1b1b1f',
+                        cardBorder: '#27272e',
+                        tjmRed: '#e62335',
+                        tjmYellow: '#ffd000',
+                        tjmCyan: '#00f0ff'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0b0d;
+            color: #e5e7eb;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero smoke background canvas/image overlay */
+        .hero-banner {
+            position: relative;
+            background-color: #0d0406;
+            border: 1px solid #27272e;
+            overflow: hidden;
+        }
+
+        .smoke-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url('smoke-f000000.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.55;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        /* Neon Glow Effects */
+        .neon-glow-red {
+            filter: drop-shadow(0 0 15px rgba(230, 35, 53, 0.7));
+        }
+        
+        .neon-glow-yellow {
+            filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.6));
+        }
+
+        .neon-glow-cyan {
+            filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6));
+        }
+
+        /* Project Posters styling */
+        .poster-trivia {
+            background: linear-gradient(135deg, #2a0509 0%, #4a0a11 50%, #150204 100%);
+            border: 1px solid #5a151b;
+        }
+
+        .poster-rhymes {
+            background: linear-gradient(135deg, #2b1f06 0%, #523709 50%, #140d02 100%);
+            border: 1px solid #6e4e10;
+        }
+
+        /* Page transition */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+        
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f4d;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white">
+
+    <header class="w-full max-w-5xl mx-auto px-4 py-5 flex items-center justify-between z-30">
+        <!-- Logo Header Navigation -->
+        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-2 group">
+            <div class="h-8 flex items-center">
+                <!-- TJM Stylized Text / Image fallback -->
+                <img src="tjmlogoTR.png" alt="TJM" class="h-8 w-auto object-contain hidden" id="navLogoImg" onload="this.classList.remove('hidden')" onerror="this.classList.add('hidden')">
+                <div id="navLogoText" class="font-black text-2xl tracking-tighter flex items-center group-hover:scale-105 transition-transform">
+                    <span class="text-tjmYellow">T</span><span class="text-tjmRed px-0.5">J</span><span class="text-tjmCyan">M</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Top Menu Items -->
+        <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+            <button onclick="navigateTo('home')" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-cardBg">
+                Что-то
+            </button>
+            <button onclick="navigateTo('home'); scrollToProjects();" class="text-gray-200 hover:text-white transition-colors py-1.5 px-3.5 bg-cardBg rounded-lg border border-cardBorder hover:border-gray-500">
+                Проекты
+            </button>
+            <button id="discordNavBtn" onclick="openDiscordModal()" class="bg-cardBg hover:bg-indigo-950/40 border border-cardBorder hover:border-indigo-500/60 text-gray-200 hover:text-indigo-300 px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-2">
+                <i class="fa-brands fa-discord text-indigo-400"></i>
+                <span id="discordNavText" class="hidden sm:inline">Привязать Discord</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto px-4 flex-1">
+
+        <!-- ==================== HOME PAGE ==================== -->
+        <section id="page-home" class="page-section active">
+            
+            <!-- Hero Banner Container -->
+            <div class="hero-banner my-4 rounded-2xl p-8 sm:p-14 text-center relative shadow-2xl">
+                <!-- Canvas Generated Smoke Background fallback -->
+                <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
+                
+                <!-- Atmospheric Image Overlay -->
+                <div class="smoke-overlay"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 pointer-events-none"></div>
+
+                <!-- Banner Content -->
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                    
+                    <!-- Main Logo Display (Image or Canvas-styled Neon Text) -->
+                    <div class="my-4 min-h-[110px] flex items-center justify-center w-full max-w-md">
+                        <img src="tjmlogoTR.png" 
+                             alt="Tiny Jack Mods Logo" 
+                             class="max-h-36 sm:max-h-44 object-contain filter drop-shadow-[0_0_20px_rgba(230,35,53,0.5)] transition-transform hover:scale-105 duration-300"
+                             onerror="this.style.display='none'; document.getElementById('neonFallbackLogo').classList.remove('hidden');">
+                        
+                        <!-- Fallback Visual Logo if Image not in directory -->
+                        <div id="neonFallbackLogo" class="hidden text-6xl sm:text-8xl font-black tracking-widest select-none flex items-center justify-center gap-1 my-2">
+                            <span class="text-tjmYellow italic transform -rotate-6 inline-block neon-glow-yellow">T</span>
+                            <span class="text-tjmRed text-7xl sm:text-9xl mx-[-12px] z-10 neon-glow-red">J</span>
+                            <span class="text-tjmCyan italic transform rotate-6 inline-block neon-glow-cyan">M</span>
+                        </div>
+                    </div>
+
+                    <!-- Subtitle Title & Description -->
+                    <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 drop-shadow-md">
+                        Tiny Jack Mods
+                    </h1>
+                    <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-2 font-medium leading-relaxed">
+                        Команда мододелов по играм серии The Jackbox Party Pack
+                    </p>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projects-list" class="my-10">
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-5 flex items-center gap-2">
+                    <span>Наши проекты</span>
+                </h2>
+
+                <div class="bg-cardBg border border-cardBorder rounded-2xl p-4 sm:p-6 space-y-6 shadow-xl">
+                    
+                    <!-- Project Card 1: Смертельная Вечеринка 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-5 hover:border-tjmRed/50 transition-all duration-300">
+                        <!-- Poster Visual -->
+                        <div class="md:col-span-5 h-52 sm:h-60 poster-trivia rounded-xl p-4 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="relative z-10 flex flex-col items-center">
+                                <span class="text-[10px] uppercase tracking-widest text-red-300 font-bold px-2.5 py-1 rounded bg-red-950/80 border border-red-800/60 mb-2">
+                                    Модификация
+                                </span>
+                                <h3 class="text-2xl sm:text-3xl font-black text-red-600 uppercase tracking-wider drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300">
+                                    СМЕРТЕЛЬНАЯ<br><span class="text-white">ВЕЧЕРИНКА</span> <span class="text-tjmYellow">2</span>
+                                </h3>
+                                <div class="mt-3 text-xs font-black bg-tjmRed text-white py-1 px-3 rounded shadow-md transform -rotate-2 tracking-wide">
+                                    COMMUNITY EDITION
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Details & Actions -->
+                        <div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 hover:text-tjmRed transition-colors cursor-pointer" onclick="navigateTo('project-tmp2')">
+                                    Смертельная Вечеринка 2: Community Edition
+                                </h3>
+                                <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
+                                    Модификация на игру "Смертельная вечеринка 2" из Jackbox Party Pack 6 и Jackbox Party Starter. Добавляет новые вопросы, заменяет реплики ведущего и вносит усложнения в некоторые мини-игры! Главной идеей мода является то, что абсолютно каждый может предложить свой вопрос для игры.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3 pt-2">
+                                <button onclick="openApplyModal()" class="bg-white hover:bg-gray-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-lg transition-all flex items-center gap-2 shadow-md hover:scale-105 active:scale-95">
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                                    Подать заявку
+                                </button>
+                                <button onclick="navigateTo('project-tmp2')" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-lg transition-all flex items-center gap-1.5">
+                                    Перейти на страницу <span class="text-gray-400">›</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2: Город Видимых Рифм -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-5 hover:border-tjmYellow/50 transition-all duration-300">
+                        <!-- Poster Visual -->
+                        <div class="md:col-span-5 h-52 sm:h-60 poster-rhymes rounded-xl p-4 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
+                            <div class="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+                            <div class="relative z-10">
+                                <span class="text-[10px] uppercase tracking-widest text-amber-300 font-bold px-2.5 py-1 rounded bg-amber-950/80 border border-amber-800/60 mb-2 inline-block">
+                                    В разработке / Полезное
+                                </span>
+                                <h3 class="text-2xl sm:text-3xl font-black text-amber-400 uppercase tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300">
+                                    ГОРОД<br><span class="text-amber-100">ВИДИМЫХ</span><br><span class="text-white">РИФМ</span>
+                                </h3>
+                            </div>
+                        </div>
+
+                        <!-- Details & Actions -->
+                        <div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 hover:text-tjmYellow transition-colors cursor-pointer" onclick="navigateTo('project-rhyme')">
+                                    Город Видимых Рифм
+                                </h3>
+                                <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
+                                    Функция для игры "Город Злых Рифм" из Jackbox Party Pack 5. Позволяет заранее увидеть первую и третью строчки текстов, чтобы было легче придумать подходящее слово для рифмы.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3 pt-2">
+                                <button onclick="downloadMod('Город Видимых Рифм')" class="bg-white hover:bg-gray-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-lg transition-all flex items-center gap-2 shadow-md hover:scale-105 active:scale-95">
+                                    <i class="fa-solid fa-download text-xs"></i>
+                                    Скачать модификацию
+                                </button>
+                                <button onclick="navigateTo('project-rhyme')" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-lg transition-all flex items-center gap-1.5">
+                                    Перейти на страницу <span class="text-gray-400">›</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROJECT 1 PAGE ==================== -->
+        <section id="page-project-tmp2" class="page-section my-6">
+            <button onclick="navigateTo('home')" class="text-gray-400 hover:text-white mb-6 flex items-center gap-2 text-sm font-semibold transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> На главную
+            </button>
+
+            <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 space-y-8 shadow-2xl">
+                <!-- Header Banner -->
+                <div class="poster-trivia rounded-xl p-8 sm:p-12 text-center relative overflow-hidden">
+                    <span class="text-xs uppercase tracking-widest text-red-300 font-bold px-3 py-1 rounded bg-red-950/90 border border-red-800/80 mb-3 inline-block">
+                        Официальный мод
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-black text-red-500 uppercase tracking-wide">
+                        Смертельная Вечеринка 2
+                    </h1>
+                    <p class="text-tjmYellow font-bold text-lg sm:text-xl mt-1 tracking-widest">COMMUNITY EDITION</p>
+                </div>
+
+                <!-- Overview -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-5">
+                        <h2 class="text-2xl font-bold text-white">О проекте</h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            <strong>Смертельная Вечеринка 2: Community Edition</strong> — это масштабная модификация на популярную викторину <em>Trivia Murder Party 2</em> из набора Jackbox Party Pack 6 (а также версии Party Starter).
+                        </p>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Проект полностью преображает привычный игровой процесс. Мы переписали реплики ведущего, добавили новые звуковые эффекты, усложнили некоторые финальные испытания на ползунках и мини-играх, а главное — внедрили сотни вопросов, созданных игровым сообществом!
+                        </p>
+
+                        <h3 class="text-xl font-bold text-white pt-4">Ключевые особенности:</h3>
+                        <ul class="space-y-2.5 text-sm text-gray-300 list-none">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tjmRed mt-1"></i>
+                                <span><strong>Народный контент:</strong> Каждый игрок может предложить свой вопрос через форму на нашем сайте.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tjmRed mt-1"></i>
+                                <span><strong>Новая озвучка и текстовые шутки:</strong> Обновлённый юмор и отсылки к русскоязычному комьюнити.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-tjmRed mt-1"></i>
+                                <span><strong>Поддержка нескольких платформ:</strong> Совместимо с Steam-версиями Jackbox Party Pack 6 и The Jackbox Party Starter.</span>
+                            </li>
+                        </ul>
+
+                        <!-- Call to actions -->
+                        <div class="flex flex-wrap gap-4 pt-6">
+                            <button onclick="openApplyModal()" class="bg-tjmRed hover:bg-red-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Предложить свой вопрос
+                            </button>
+                            <button onclick="downloadMod('Смертельная Вечеринка 2 CE')" class="bg-white hover:bg-gray-200 text-black font-bold text-sm px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-download"></i>
+                                Скачать мод v1.4.2
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar specs -->
+                    <div class="bg-black/40 border border-cardBorder rounded-xl p-5 space-y-4 h-fit">
+                        <h3 class="font-bold text-white text-base border-b border-cardBorder pb-3">Информация</h3>
+                        
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <span class="text-gray-400 block">Версия мода:</span>
+                                <span class="text-white font-semibold">1.4.2 (Latest)</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block">Базовая игра:</span>
+                                <span class="text-white font-semibold">Jackbox Party Pack 6 / Starter</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block">Авторы модификации:</span>
+                                <span class="text-tjmYellow font-semibold">Tiny Jack Mods Team</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block">Язык:</span>
+                                <span class="text-white font-semibold">Русский</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="https://discord.gg" target="_blank" class="w-full bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 font-semibold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-discord"></i> Обсудить в Discord
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROJECT 2 PAGE ==================== -->
+        <section id="page-project-rhyme" class="page-section my-6">
+            <button onclick="navigateTo('home')" class="text-gray-400 hover:text-white mb-6 flex items-center gap-2 text-sm font-semibold transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> На главную
+            </button>
+
+            <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 space-y-8 shadow-2xl">
+                <!-- Header Banner -->
+                <div class="poster-rhymes rounded-xl p-8 sm:p-12 text-center relative overflow-hidden">
+                    <span class="text-xs uppercase tracking-widest text-amber-300 font-bold px-3 py-1 rounded bg-amber-950/90 border border-amber-800/80 mb-3 inline-block">
+                        Утилита / Модификация
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-black text-amber-400 uppercase tracking-tight">
+                        Город Видимых Рифм
+                    </h1>
+                    <p class="text-gray-300 font-medium text-sm sm:text-base mt-2">Мод-помощник для Mad Verse City (Jackbox Party Pack 5)</p>
+                </div>
+
+                <!-- Overview -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-5">
+                        <h2 class="text-2xl font-bold text-white">Описание функции</h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Функция для игры <strong>"Город Злых Рифм" (Mad Verse City)</strong> из <em>Jackbox Party Pack 5</em>.
+                        </p>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Позволяет заранее увидеть первую и третью строчки текстов прямо во время ввода, чтобы было значительно легче придумать подпадающее по смыслу и ритму слово для рифмы.
+                        </p>
+
+                        <div class="bg-amber-950/30 border border-amber-800/50 p-4 rounded-xl space-y-2">
+                            <h4 class="font-bold text-amber-300 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb"></i> Зачем это нужно?
+                            </h4>
+                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                                В оригинальной игре вам даётся только заготовка финальной строчки, из-за чего сложно составить связный четверостишный рэп-куплет. Данная модификация делает виден контекст всего куплетов заранее!
+                            </p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white pt-2">Инструкция по установке:</h3>
+                        <ol class="space-y-3 text-sm text-gray-300 list-decimal list-inside bg-black/30 p-4 rounded-xl border border-cardBorder">
+                            <li>Скачайте архив с модификацией по кнопке ниже.</li>
+                            <li>Распакуйте содержимое в корневую папку игры <code>The Jackbox Party Pack 5/games/RapCity</code>.</li>
+                            <li>Запустите игру и наслаждайтесь удобным рэп-батлом!</li>
+                        </ol>
+
+                        <div class="pt-4">
+                            <button onclick="downloadMod('Город Видимых Рифм')" class="bg-tjmYellow hover:bg-yellow-400 text-black font-bold text-sm px-6 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95">
+                                <i class="fa-solid fa-download"></i>
+                                Скачать Город Видимых Рифм
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar specs -->
+                    <div class="bg-black/40 border border-cardBorder rounded-xl p-5 space-y-4 h-fit">
+                        <h3 class="font-bold text-white text-base border-b border-cardBorder pb-3">Детали</h3>
+                        
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <span class="text-gray-400 block">Совместимость:</span>
+                                <span class="text-white font-semibold">Jackbox Party Pack 5</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block">Игра:</span>
+                                <span class="text-white font-semibold">Mad Verse City (Город Злых Рифм)</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block">Разработчик:</span>
+                                <span class="text-tjmYellow font-semibold">Tiny Jack Mods</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto px-4 py-8 border-t border-cardBorder/60 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-start text-xs text-gray-400">
+            <!-- Col 1: Logo -->
+            <div class="flex flex-col items-start gap-2">
+                <div class="font-black text-2xl tracking-tighter cursor-pointer" onclick="navigateTo('home')">
+                    <span class="text-tjmYellow">T</span><span class="text-tjmRed">J</span><span class="text-tjmCyan">M</span>
+                </div>
+                <p class="text-gray-500">© Tiny Jack Mods, 2026</p>
+            </div>
+
+            <!-- Col 2: Navigation -->
+            <div class="space-y-1.5">
+                <div class="font-semibold text-gray-200 text-sm mb-2">Навигация</div>
+                <div><button onclick="navigateTo('home'); scrollToProjects();" class="hover:text-white transition-colors">Проекты</button></div>
+                <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
+            </div>
+
+            <!-- Col 3: Socials -->
+            <div class="space-y-2">
+                <div class="font-semibold text-gray-200 text-sm mb-2">@TinyJackMods</div>
+                <div class="flex items-center gap-3 text-lg">
+                    <a href="https://youtube.com" target="_blank" rel="noopener" class="hover:text-red-500 transition-colors" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://discord.gg" target="_blank" rel="noopener" class="hover:text-indigo-400 transition-colors" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://t.me" target="_blank" rel="noopener" class="hover:text-sky-400 transition-colors" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 4: Credits & Disclaimer -->
+            <div class="space-y-2 md:text-right">
+                <div>
+                    <span class="text-gray-500">Создание сайта</span>
+                    <a href="https://t.me/puskanyaww" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@puskanyaww</a>
+                </div>
+                <div class="text-gray-500 pt-2 border-t border-cardBorder/40">
+                    Not associated with Jackbox Games
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: Application Form ("Подать заявку") -->
+    <div id="applyModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('applyModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-tjmRed/20 text-tjmRed flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Подать заявку</h3>
+                    <p class="text-xs text-gray-400">Смертельная Вечеринка 2: CE</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-300 mb-5 leading-relaxed">
+                Предложите свой вопрос или категорию для включения в игру!
+            </p>
+            
+            <form onsubmit="handleApplySubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Ваш Discord или Telegram</label>
+                    <input type="text" id="appContact" required placeholder="@username" class="w-full bg-darkBg border border-cardBorder rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-tjmRed transition-colors">
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Текст вопроса</label>
+                    <textarea id="appQuestion" required rows="3" placeholder="Например: Какая планета самая большая в Солнечной системе?" class="w-full bg-darkBg border border-cardBorder rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-tjmRed transition-colors"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Варианты ответов (отметьте правильный)</label>
+                    <input type="text" id="appAnswers" required placeholder="1. Юпитер (верный), 2. Марс, 3. Венера, 4. Земля" class="w-full bg-darkBg border border-cardBorder rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-tjmRed transition-colors">
+                </div>
+
+                <button type="submit" class="w-full bg-tjmRed hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-all text-sm shadow-lg mt-2">
+                    Отправить предложение
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Discord Link Simulation -->
+    <div id="discordModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative text-center">
+            <button onclick="closeModal('discordModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-indigo-500/30">
+                <i class="fa-brands fa-discord"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-1.5">Привязать Discord</h3>
+            <p class="text-xs text-gray-400 mb-6 leading-relaxed">
+                Авторизуйтесь через Discord для получения ролей тестировщика и синхронизации статусов на сервере Tiny Jack Mods.
+            </p>
+            
+            <button id="discordAuthBtn" onclick="simulateDiscordAuth()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-lg">
+                <i class="fa-brands fa-discord"></i>
+                <span>Войти через Discord</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 transform translate-y-4 pointer-events-none z-50 border border-emerald-400/30">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="toastMessage" class="text-xs sm:text-sm font-medium">Действие выполнено!</span>
+    </div>
+
+    <script>
+        // Page Navigation Logic (Single Page Application)
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(p => p.classList.remove('active'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            } else {
+                document.getElementById('page-home').classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToProjects() {
+            setTimeout(() => {
+                const el = document.getElementById('projects-list');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // Modal Controllers
+        function openApplyModal() {
+            document.getElementById('applyModal').classList.remove('hidden');
+        }
+
+        function openDiscordModal() {
+            document.getElementById('discordModal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Form Handlers
+        function handleApplySubmit(event) {
+            event.preventDefault();
+            closeModal('applyModal');
+            showToast('Заявка успешно отправлена команде TJM!');
+            event.target.reset();
+        }
+
+        function downloadMod(projectName) {
+            showToast(`Загрузка модификации "${projectName}" началась!`);
+        }
+
+        let isDiscordConnected = false;
+        function simulateDiscordAuth() {
+            const btn = document.getElementById('discordAuthBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Авторизация...';
+            
+            setTimeout(() => {
+                isDiscordConnected = true;
+                closeModal('discordModal');
+                showToast('Discord аккаунт успешно привязан!');
+                
+                // Update Nav Bar state
+                document.getElementById('discordNavBtn').classList.add('border-emerald-500/50', 'text-emerald-400');
+                document.getElementById('discordNavText').textContent = 'Discord Подключен';
+                btn.innerHTML = '<i class="fa-brands fa-discord"></i> Войти через Discord';
+            }, 1200);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            }, 3200);
+        }
+
+        // Close modal on outer click
+        window.onclick = function(event) {
+            ['applyModal', 'discordModal'].forEach(id => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    closeModal(id);
+                }
+            });
+        };
+
+        // Render Canvas Dynamic Smoke Particles Fallback
+        window.onload = function() {
+            const canvas = document.getElementById('smokeCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = canvas.offsetWidth;
+            let height = canvas.height = canvas.offsetHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            });
+
+            const particles = Array.from({ length: 25 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 80 + 40,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: -Math.random() * 0.3 - 0.1,
+                alpha: Math.random() * 0.3 + 0.1
+            }));
+
+            function animateSmoke() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.y + p.radius < 0) {
+                        p.y = height + p.radius;
+                        p.x = Math.random() * width;
+                    }
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                    grad.addColorStop(0, `rgba(200, 30, 45, ${p.alpha})`);
+                    grad.addColorStop(1, 'rgba(10, 5, 8, 0)');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateSmoke);
+            }
+
+            animateSmoke();
+        };
+    </script>
+</body>
+</html>
