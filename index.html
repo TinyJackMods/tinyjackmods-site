@@ -28,6 +28,7 @@
                     },
                     fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
+                        impact: ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'],
                     }
                 }
             }
@@ -150,20 +151,20 @@
         <!-- ==================== HOME PAGE ==================== -->
         <section id="page-home" class="page-section active">
             
-            <!-- Hero Block Wrapper -->
-            <div class="my-6 text-center">
-                
-                <!-- Уменьшенная рамка с дымом ТОЛЬКО для логотипа -->
-                <div class="hero-banner rounded-2xl p-4 sm:p-6 relative shadow-2xl flex items-center justify-center">
-                    <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
-                    <div class="smoke-overlay"></div>
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none"></div>
+            <!-- Hero Banner (Текст и подзаголовок возвращены внутрь рамки) -->
+            <div class="hero-banner my-6 rounded-2xl p-6 sm:p-8 text-center relative shadow-2xl">
+                <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
+                <div class="smoke-overlay"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70 pointer-events-none"></div>
 
-                    <!-- ТJM Logo -->
-                    <div class="relative z-10 py-1 flex items-center justify-center w-full">
+                <!-- Banner Content -->
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                    
+                    <!-- Логотип TJM -->
+                    <div class="py-1 flex items-center justify-center w-full">
                         <img src="tjmlogo.png" 
                              alt="Tiny Jack Mods Logo" 
-                             class="h-64 sm:h-96 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(230,35,53,0.7)] transition-transform hover:scale-105 duration-300"
+                             class="h-56 sm:h-80 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(230,35,53,0.7)] transition-transform hover:scale-105 duration-300"
                              onerror="this.style.display='none'; document.getElementById('neonFallbackLogo').classList.remove('hidden');">
                         
                         <div id="neonFallbackLogo" class="hidden text-8xl sm:text-[11rem] font-black tracking-widest select-none flex items-center justify-center gap-1 my-2">
@@ -172,14 +173,12 @@
                             <span class="text-tjmCyan italic transform rotate-6 inline-block neon-glow-cyan">M</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Заголовок и подзаголовок вне рамки -->
-                <div class="mt-4">
-                    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight drop-shadow-md">
+                    <!-- Заголовок со шрифтом Impact как в оригинальном примере -->
+                    <h1 class="font-impact text-4xl sm:text-6xl text-white tracking-wide uppercase mt-2 drop-shadow-md">
                         Tiny Jack Mods
                     </h1>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-2 font-medium leading-relaxed">
+                    <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto mt-1 font-medium leading-relaxed opacity-90">
                         Команда мододелов по играм серии The Jackbox Party Pack
                     </p>
                 </div>
@@ -193,7 +192,7 @@
 
                 <div class="bg-cardBg border border-cardBorder rounded-2xl p-4 sm:p-6 space-y-6 shadow-xl">
                     
-                    <!-- Project Card 1: Смертельная Вечеринка 2 (Без доп. внутренней обводки) -->
+                    <!-- Project Card 1: Смертельная Вечеринка 2 -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
                         <div class="md:col-span-5 h-48 sm:h-56 poster-trivia rounded-xl overflow-hidden flex items-center justify-center relative group shadow-lg">
                             <img src="TMP2CELOGO.png" 
@@ -238,7 +237,7 @@
 
                     <div class="border-b border-cardBorder/60 my-2"></div>
 
-                    <!-- Project Card 2: Город Видимых Рифм (Без доп. внутренней обводки) -->
+                    <!-- Project Card 2: Город Видимых Рифм -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
                         <div class="md:col-span-5 h-48 sm:h-56 poster-rhymes rounded-xl overflow-hidden flex items-center justify-center relative group shadow-lg text-center p-4">
                             <div class="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
