@@ -114,30 +114,33 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white">
 
-    <header class="w-full max-w-5xl mx-auto px-4 py-5 flex items-center justify-between z-30">
-        <!-- Logo Header Navigation -->
-        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-2 group">
-            <div class="h-8 flex items-center">
-                <!-- TJM Stylized Text / Image fallback -->
-                <img src="tjmlogo.png" alt="TJM" class="h-8 w-auto object-contain hidden" id="navLogoImg" onload="this.classList.remove('hidden')" onerror="this.classList.add('hidden')">
-                <div id="navLogoText" class="font-black text-2xl tracking-tighter flex items-center group-hover:scale-105 transition-transform">
+    <!-- Sticky Header: зафиксирован сверху при прокрутке -->
+    <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Ч/Б Логотип в шапке -->
+            <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-2 group">
+                <div class="h-9 flex items-center">
+                    <img src="tjmlogo.png" alt="TJM" class="h-9 w-auto object-contain filter grayscale contrast-125 transition-transform group-hover:scale-105" id="navLogoImg" onerror="this.style.display='none'; document.getElementById('navLogoText').classList.remove('hidden')">
+                    <div id="navLogoText" class="hidden font-black text-2xl tracking-tighter flex items-center text-gray-400 group-hover:text-white transition-colors">
+                        TJM
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
 
-        <!-- Top Menu Items -->
-        <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
-            <button onclick="navigateTo('home')" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-cardBg">
-                Главная
-            </button>
-            <button onclick="navigateTo('home'); scrollToProjects();" class="text-gray-200 hover:text-white transition-colors py-1.5 px-3.5 bg-cardBg rounded-lg border border-cardBorder hover:border-gray-500">
-                Проекты
-            </button>
-            <button id="discordNavBtn" onclick="openDiscordModal()" class="bg-cardBg hover:bg-indigo-950/40 border border-cardBorder hover:border-indigo-500/60 text-gray-200 hover:text-indigo-300 px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-2">
-                <i class="fa-brands fa-discord text-indigo-400"></i>
-                <span id="discordNavText" class="hidden sm:inline">Привязать Discord</span>
-            </button>
-        </nav>
+            <!-- Top Menu Items -->
+            <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                <button onclick="navigateTo('home')" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-cardBg">
+                    Главная
+                </button>
+                <button onclick="navigateTo('home'); scrollToProjects();" class="text-gray-200 hover:text-white transition-colors py-1.5 px-3.5 bg-cardBg rounded-lg border border-cardBorder hover:border-gray-500">
+                    Проекты
+                </button>
+                <button id="discordNavBtn" onclick="openDiscordModal()" class="bg-cardBg hover:bg-indigo-950/40 border border-cardBorder hover:border-indigo-500/60 text-gray-200 hover:text-indigo-300 px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-discord text-indigo-400"></i>
+                    <span id="discordNavText" class="hidden sm:inline">Привязать Discord</span>
+                </button>
+            </nav>
+        </div>
     </header>
 
     <main class="w-full max-w-5xl mx-auto px-4 flex-1">
@@ -146,7 +149,7 @@
         <section id="page-home" class="page-section active">
             
             <!-- Hero Banner Container -->
-            <div class="hero-banner my-4 rounded-2xl p-8 sm:p-14 text-center relative shadow-2xl">
+            <div class="hero-banner my-6 rounded-2xl p-8 sm:p-16 text-center relative shadow-2xl">
                 <!-- Canvas Generated Smoke Background fallback -->
                 <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
                 
@@ -157,26 +160,26 @@
                 <!-- Banner Content -->
                 <div class="relative z-10 flex flex-col items-center justify-center">
                     
-                    <!-- Main Logo Display (Image or Canvas-styled Neon Text) -->
-                    <div class="my-4 min-h-[110px] flex items-center justify-center w-full max-w-md">
+                    <!-- Увеличенный главный логотип TJM -->
+                    <div class="my-4 min-h-[140px] sm:min-h-[180px] flex items-center justify-center w-full max-w-lg">
                         <img src="tjmlogo.png" 
                              alt="Tiny Jack Mods Logo" 
-                             class="max-h-36 sm:max-h-44 object-contain filter drop-shadow-[0_0_20px_rgba(230,35,53,0.5)] transition-transform hover:scale-105 duration-300"
+                             class="max-h-56 sm:max-h-72 w-auto object-contain filter drop-shadow-[0_0_25px_rgba(230,35,53,0.6)] transition-transform hover:scale-105 duration-300"
                              onerror="this.style.display='none'; document.getElementById('neonFallbackLogo').classList.remove('hidden');">
                         
                         <!-- Fallback Visual Logo if Image not in directory -->
-                        <div id="neonFallbackLogo" class="hidden text-6xl sm:text-8xl font-black tracking-widest select-none flex items-center justify-center gap-1 my-2">
+                        <div id="neonFallbackLogo" class="hidden text-7xl sm:text-9xl font-black tracking-widest select-none flex items-center justify-center gap-1 my-2">
                             <span class="text-tjmYellow italic transform -rotate-6 inline-block neon-glow-yellow">T</span>
-                            <span class="text-tjmRed text-7xl sm:text-9xl mx-[-12px] z-10 neon-glow-red">J</span>
+                            <span class="text-tjmRed text-8xl sm:text-[11rem] mx-[-15px] z-10 neon-glow-red">J</span>
                             <span class="text-tjmCyan italic transform rotate-6 inline-block neon-glow-cyan">M</span>
                         </div>
                     </div>
 
                     <!-- Subtitle Title & Description -->
-                    <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 drop-shadow-md">
+                    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-2 drop-shadow-md">
                         Tiny Jack Mods
                     </h1>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-2 font-medium leading-relaxed">
+                    <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-3 font-medium leading-relaxed">
                         Команда мододелов по играм серии The Jackbox Party Pack
                     </p>
                 </div>
@@ -192,11 +195,11 @@
                     
                     <!-- Project Card 1: Смертельная Вечеринка 2 -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-5 hover:border-tjmRed/50 transition-all duration-300">
-                        <!-- Poster Visual -->
-                        <div class="md:col-span-5 h-52 sm:h-60 poster-trivia rounded-xl p-4 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
+                        <!-- Увеличенный постер карточки проекта -->
+                        <div class="md:col-span-5 h-64 sm:h-72 poster-trivia rounded-xl p-3 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
                             <img src="TMP2CELOGO.png" 
                                  alt="Смертельная Вечеринка 2 Community Edition" 
-                                 class="max-h-full max-w-full object-contain relative z-10 group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                                 class="w-full h-full object-contain relative z-10 transform scale-105 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]"
                                  onerror="this.style.display='none'; document.getElementById('posterFallbackTMP2').classList.remove('hidden');">
                             
                             <!-- Fallback layout if image is missing -->
@@ -238,7 +241,7 @@
                     <!-- Project Card 2: Город Видимых Рифм -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-5 hover:border-tjmYellow/50 transition-all duration-300">
                         <!-- Poster Visual -->
-                        <div class="md:col-span-5 h-52 sm:h-60 poster-rhymes rounded-xl p-4 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
+                        <div class="md:col-span-5 h-64 sm:h-72 poster-rhymes rounded-xl p-4 flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-lg">
                             <div class="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
                             <div class="relative z-10">
                                 <span class="text-[10px] uppercase tracking-widest text-amber-300 font-bold px-2.5 py-1 rounded bg-amber-950/80 border border-amber-800/60 mb-2 inline-block">
@@ -284,10 +287,10 @@
 
             <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 sm:p-8 space-y-8 shadow-2xl">
                 <!-- Header Banner -->
-                <div class="poster-trivia rounded-xl p-6 sm:p-10 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[180px]">
+                <div class="poster-trivia rounded-xl p-6 sm:p-10 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[220px]">
                     <img src="TMP2CELOGO.png" 
                          alt="Смертельная Вечеринка 2 Community Edition" 
-                         class="max-h-48 sm:max-h-64 object-contain filter drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)]"
+                         class="max-h-56 sm:max-h-80 object-contain filter drop-shadow-[0_5px_20px_rgba(0,0,0,0.95)]"
                          onerror="this.style.display='none'; document.getElementById('headerFallbackTMP2').classList.remove('hidden');">
                     
                     <!-- Fallback header text -->
@@ -459,9 +462,10 @@
             <div class="flex flex-col items-start gap-2">
                 <div class="font-black text-2xl tracking-tighter cursor-pointer" onclick="navigateTo('home')">
                     <img src="tjmlogo.png" 
-                             alt="Tiny Jack Mods Logo" 
-                             class="max-h-36 sm:max-h-44 object-contain filter drop-shadow-[0_0_20px_rgba(230,35,53,0.5)] transition-transform hover:scale-105 duration-300"
-                             onerror="this.style.display='none'; document.getElementById('neonFallbackLogo').classList.remove('hidden');">
+                         alt="Tiny Jack Mods Logo" 
+                         class="max-h-12 w-auto object-contain filter contrast-125 transition-transform hover:scale-105"
+                         onerror="this.style.display='none'; document.getElementById('footerFallbackLogo').classList.remove('hidden');">
+                    <span id="footerFallbackLogo" class="hidden text-tjmYellow">T<span class="text-tjmRed">J</span><span class="text-tjmCyan">M</span></span>
                 </div>
                 <p class="text-gray-500">© Tiny Jack Mods, 2026</p>
             </div>
