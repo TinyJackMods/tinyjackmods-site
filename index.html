@@ -41,7 +41,7 @@
             overflow-x: hidden;
         }
 
-        /* Hero smoke background canvas/image overlay */
+        /* Hero smoke background box */
         .hero-banner {
             position: relative;
             background-color: #0d0406;
@@ -73,7 +73,7 @@
             filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.7));
         }
 
-        /* Project Posters styling without borders */
+        /* Project Posters styling */
         .poster-trivia {
             background: linear-gradient(135deg, #2a0509 0%, #4a0a11 50%, #150204 100%);
         }
@@ -115,7 +115,6 @@
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <!-- Ч/Б Логотип TJM в шапке -->
             <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-2 group">
                 <div class="h-9 flex items-center">
                     <img src="tjmlogo.png" 
@@ -151,17 +150,17 @@
         <!-- ==================== HOME PAGE ==================== -->
         <section id="page-home" class="page-section active">
             
-            <!-- Hero Banner Container (Вернули компактный размер рамки) -->
-            <div class="hero-banner my-6 rounded-2xl p-4 sm:p-6 text-center relative shadow-2xl">
-                <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
-                <div class="smoke-overlay"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80 pointer-events-none"></div>
+            <!-- Hero Block Wrapper -->
+            <div class="my-6 text-center">
+                
+                <!-- Уменьшенная рамка с дымом ТОЛЬКО для логотипа -->
+                <div class="hero-banner rounded-2xl p-4 sm:p-6 relative shadow-2xl flex items-center justify-center">
+                    <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40"></canvas>
+                    <div class="smoke-overlay"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none"></div>
 
-                <!-- Banner Content -->
-                <div class="relative z-10 flex flex-col items-center justify-center">
-                    
-                    <!-- Сохранённый крупный логотип TJM -->
-                    <div class="my-1 py-2 flex items-center justify-center w-full">
+                    <!-- ТJM Logo -->
+                    <div class="relative z-10 py-1 flex items-center justify-center w-full">
                         <img src="tjmlogo.png" 
                              alt="Tiny Jack Mods Logo" 
                              class="h-64 sm:h-96 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(230,35,53,0.7)] transition-transform hover:scale-105 duration-300"
@@ -173,9 +172,11 @@
                             <span class="text-tjmCyan italic transform rotate-6 inline-block neon-glow-cyan">M</span>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Subtitle Title & Description -->
-                    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1 drop-shadow-md">
+                <!-- Заголовок и подзаголовок вне рамки -->
+                <div class="mt-4">
+                    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight drop-shadow-md">
                         Tiny Jack Mods
                     </h1>
                     <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mt-2 font-medium leading-relaxed">
@@ -192,9 +193,8 @@
 
                 <div class="bg-cardBg border border-cardBorder rounded-2xl p-4 sm:p-6 space-y-6 shadow-xl">
                     
-                    <!-- Project Card 1: Смертельная Вечеринка 2 -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-6 hover:border-tjmRed/50 transition-all duration-300">
-                        <!-- Постер прежнего размера без внутренних рамок -->
+                    <!-- Project Card 1: Смертельная Вечеринка 2 (Без доп. внутренней обводки) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
                         <div class="md:col-span-5 h-48 sm:h-56 poster-trivia rounded-xl overflow-hidden flex items-center justify-center relative group shadow-lg">
                             <img src="TMP2CELOGO.png" 
                                  alt="Смертельная Вечеринка 2 Community Edition" 
@@ -236,9 +236,10 @@
                         </div>
                     </div>
 
-                    <!-- Project Card 2: Город Видимых Рифм -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-black/50 border border-cardBorder/80 rounded-xl p-4 sm:p-6 hover:border-tjmYellow/50 transition-all duration-300">
-                        <!-- Постер прежнего размера без внутренних рамок -->
+                    <div class="border-b border-cardBorder/60 my-2"></div>
+
+                    <!-- Project Card 2: Город Видимых Рифм (Без доп. внутренней обводки) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
                         <div class="md:col-span-5 h-48 sm:h-56 poster-rhymes rounded-xl overflow-hidden flex items-center justify-center relative group shadow-lg text-center p-4">
                             <div class="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
                             <div class="relative z-10">
@@ -448,7 +449,6 @@
     <!-- Footer Page Section -->
     <footer class="w-full max-w-5xl mx-auto px-4 py-8 border-t border-cardBorder/60 mt-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-start text-xs text-gray-400">
-            <!-- Col 1: Ч/Б Логотип в футере -->
             <div class="flex flex-col items-start gap-2">
                 <div class="font-black text-2xl tracking-tighter cursor-pointer" onclick="navigateTo('home')">
                     <img src="tjmlogo.png" 
@@ -461,14 +461,12 @@
                 <p class="text-gray-500">© Tiny Jack Mods, 2026</p>
             </div>
 
-            <!-- Col 2: Navigation -->
             <div class="space-y-1.5">
                 <div class="font-semibold text-gray-200 text-sm mb-2">Навигация</div>
                 <div><button onclick="navigateTo('home'); scrollToProjects();" class="hover:text-white transition-colors">Проекты</button></div>
                 <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
             </div>
 
-            <!-- Col 3: Socials -->
             <div class="space-y-2">
                 <div class="font-semibold text-gray-200 text-sm mb-2">@TinyJackMods</div>
                 <div class="flex items-center gap-3 text-lg">
@@ -478,7 +476,6 @@
                 </div>
             </div>
 
-            <!-- Col 4: Credits & Disclaimer -->
             <div class="space-y-2 md:text-right">
                 <div>
                     <span class="text-gray-500">Создание сайта</span>
