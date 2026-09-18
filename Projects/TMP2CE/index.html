@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark scroll-smooth">
+<html lang="ru" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,9 @@
         }
     </script>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white bg-darkBg text-white">
 
+    <!-- Header -->
     <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
         <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="../../index.html" class="flex items-center gap-2 group">
@@ -37,87 +38,249 @@
             </a>
             <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
                 <a href="../../index.html" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Главная</a>
-                <a href="../../index.html#projects-list" class="text-gray-200 hover:text-white transition-colors py-1.5 px-3.5 bg-cardBg rounded-sm border border-cardBorder hover:border-gray-500">Проекты</a>
-                <button id="discordNavBtn" onclick="openDiscordModal()" class="bg-cardBg hover:bg-indigo-950/40 border border-cardBorder hover:border-indigo-500/60 text-gray-200 hover:text-indigo-300 px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
-                    <span id="discordNavText">Привязать Discord</span>
-                </button>
+                <a href="../../index.html#projects-list" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Проекты</a>
+                <a href="../../Login/index.html" id="steamNavBtn" class="bg-cardBg hover:bg-slate-800 border border-cardBorder hover:border-gray-500 text-gray-200 hover:text-white px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-steam text-base text-gray-300"></i>
+                    <span id="steamNavText">Привязать Steam</span>
+                </a>
             </nav>
         </div>
     </header>
 
-    <main class="w-full max-w-5xl mx-auto px-4 flex-1">
-        <a href="../../index.html" class="text-gray-400 hover:text-white mt-6 mb-6 inline-flex items-center gap-2 text-sm font-semibold transition-colors">
-            <i class="fa-solid fa-arrow-left"></i> На главную
-        </a>
+    <main class="w-full max-w-5xl mx-auto px-4 flex-1 my-6 space-y-6">
 
-        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 space-y-8 shadow-2xl">
-            <div class="poster-trivia rounded-sm p-8 sm:p-14 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[260px]">
-                <img src="../../TMP2CELOGO.png" alt="Смертельная Вечеринка 2 Community Edition"
-                     class="max-h-64 sm:max-h-80 object-contain filter drop-shadow-[0_5px_25px_rgba(0,0,0,0.95)]"
-                     onerror="this.style.display='none'; document.getElementById('headerFallbackTMP2').classList.remove('hidden');">
-                <div id="headerFallbackTMP2" class="hidden">
-                    <span class="text-xs uppercase tracking-widest text-red-300 font-bold px-3 py-1 rounded-sm bg-red-950/90 mb-3 inline-block">Официальный мод</span>
-                    <h1 class="text-3xl sm:text-5xl font-black text-red-500 uppercase tracking-wide">Смертельная Вечеринка 2</h1>
-                    <p class="text-tjmYellow font-bold text-lg sm:text-xl mt-1 tracking-widest">COMMUNITY EDITION</p>
+        <!-- Banner Block -->
+        <div class="relative w-full h-80 sm:h-96 rounded-sm bg-black flex items-center justify-center border border-cardBorder/50 shadow-2xl overflow-hidden">
+            <img src="BACKGROUND.png" alt="Фон Смертельной Вечеринки" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-60 rounded-sm">
+            <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-black/50 pointer-events-none rounded-sm"></div>
+
+            <img src="CB2CE.png" alt="Смертельная Вечеринка 2 Community Edition"
+                 class="relative z-10 max-h-56 sm:max-h-72 w-auto object-contain drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] transform-gpu scale-[1.5] sm:scale-[1.6] transition-transform duration-300"
+                 onerror="this.style.display='none'; document.getElementById('heroFallback').classList.remove('hidden');">
+            
+            <div id="heroFallback" class="hidden relative z-10 text-center">
+                <h1 class="text-3xl sm:text-5xl font-black text-tjmRed uppercase tracking-wide">Смертельная Вечеринка 2</h1>
+                <p class="text-tjmYellow font-bold text-lg sm:text-xl mt-1 tracking-widest">COMMUNITY EDITION</p>
+            </div>
+        </div>
+
+        <!-- Info Block & Buttons -->
+        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-8 space-y-3">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-white">
+                        Смертельная Вечеринка 2: Community Edition
+                    </h1>
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
+                        «Смертельная вечеринка 2: Community edition» — проект, дающий свежий взгляд на старую добрую викторину! Вас ждут сотни новых вопросов, придуманных ВАМИ, непонятные и порой глупые слова в мини-игре «Зеркало», абсурдные тексты в мини-игре «ДИКтант», самые обычные, но новые шутки в мини-игре «Сдохлыст», «новый никому не нужный переписанный лор!», новые настройки и функции, усложнение некоторых механик в игре, нововведения, добавляющие в игру небольшое разнообразие, и многое другое!
+                    </p>
+                </div>
+
+                <div class="md:col-span-4 flex flex-col gap-2.5 w-full">
+                    <a href="/Download/TMP2CE/index.html" class="w-full bg-white hover:bg-gray-200 text-black font-bold text-xs sm:text-sm py-2.5 px-4 rounded-sm transition-all shadow-md text-center block">
+                        Скачать модификацию
+                    </a>
+
+                    <!-- Блок Детали -->
+                    <div class="bg-darkBg/60 border border-cardBorder/80 rounded-sm p-4 mt-1 space-y-3">
+                        <h2 class="text-base font-bold text-white border-b border-cardBorder/60 pb-2">Детали</h2>
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <span class="text-gray-400 block mb-0.5 font-normal">Совместимость:</span>
+                                <span class="text-white font-bold text-sm">Jackbox Party Pack 6, Jackbox Party Starter</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block mb-0.5 font-normal">Игра:</span>
+                                <span class="text-white font-bold text-sm">Trivia Murder Party 2 (Смертельная Вечеринка 2)</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block mb-0.5 font-normal">Разработчик:</span>
+                                <span class="text-tjmRed font-bold text-sm">Tiny Jack Mods</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-5">
-                    <h2 class="text-2xl font-bold text-white">О проекте</h2>
-                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                        <strong>Смертельная Вечеринка 2: Community Edition</strong> — это масштабная модификация на популярную викторину <em>Trivia Murder Party 2</em> из набора Jackbox Party Pack 6 (а также версии Party Starter).
-                    </p>
-                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                        Проект полностью преображает привычный игровой процесс. Мы переписали реплики ведущего, добавили новые звуковые эффекты, усложнили некоторые финальные испытания на ползунках и мини-играх, а главное — внедрили сотни вопросов, созданных игровым сообществом!
-                    </p>
-
-                    <h3 class="text-xl font-bold text-white pt-4">Ключевые особенности:</h3>
-                    <ul class="space-y-2.5 text-sm text-gray-300 list-none">
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-tjmRed mt-1"></i><span><strong>Народный контент:</strong> Каждый игрок может предложить свой вопрос через форму на нашем сайте.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-tjmRed mt-1"></i><span><strong>Новая озвучка и текстовые шутки:</strong> Обновлённый юмор и отсылки к русскоязычному комьюнити.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-tjmRed mt-1"></i><span><strong>Поддержка нескольких платформ:</strong> Совместимо с Steam-версиями Jackbox Party Pack 6 и The Jackbox Party Starter.</span></li>
-                    </ul>
-
-                    <div class="flex flex-wrap gap-4 pt-6">
-                        <button onclick="openApplyModal()" class="bg-tjmRed hover:bg-red-700 text-white font-bold text-sm px-6 py-3 rounded-sm transition-all flex items-center gap-2 shadow-lg">Предложить свой вопрос</button>
-                        <button onclick="downloadMod('Смертельная Вечеринка 2 CE')" class="bg-white hover:bg-gray-200 text-black font-bold text-sm px-6 py-3 rounded-sm transition-all flex items-center gap-2 shadow-lg">Скачать мод v1.4.2</button>
+            <!-- Carousel Section -->
+            <div class="mt-8 relative w-full aspect-video bg-black/80 rounded-sm overflow-hidden border border-cardBorder/50 group select-none">
+                <div id="carouselTrack" class="flex h-full w-full transition-transform duration-500 ease-in-out">
+                    <div class="w-full h-full shrink-0 flex items-center justify-center">
+                        <img src="Gameplay1.png" alt="Скриншот 1" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div class="w-full h-full shrink-0 flex items-center justify-center">
+                        <img src="Gameplay2.png" alt="Скриншот 2" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div class="w-full h-full shrink-0 flex items-center justify-center">
+                        <img src="Gameplay3.png" alt="Скриншот 3" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div class="w-full h-full shrink-0 flex items-center justify-center">
+                        <img src="Gameplay4.png" alt="Скриншот 4" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div class="w-full h-full shrink-0 flex items-center justify-center">
+                        <img src="Gameplay5.png" alt="Скриншот 5" class="max-w-full max-h-full object-contain">
                     </div>
                 </div>
 
-                <div class="bg-black/40 border border-cardBorder rounded-sm p-5 space-y-4 h-fit">
-                    <h3 class="font-bold text-white text-base border-b border-cardBorder pb-3">Информация</h3>
-                    <div class="space-y-3 text-xs sm:text-sm">
-                        <div><span class="text-gray-400 block">Версия мода:</span><span class="text-white font-semibold">1.4.2 (Latest)</span></div>
-                        <div><span class="text-gray-400 block">Базовая игра:</span><span class="text-white font-semibold">Jackbox Party Pack 6 / Starter</span></div>
-                        <div><span class="text-gray-400 block">Авторы модификации:</span><span class="text-tjmYellow font-semibold">Tiny Jack Mods Team</span></div>
-                        <div><span class="text-gray-400 block">Язык:</span><span class="text-white font-semibold">Русский</span></div>
+                <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/60 hover:bg-black/90 text-white rounded-full flex items-center justify-center border border-white/10 transition-colors z-10">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/60 hover:bg-black/90 text-white rounded-full flex items-center justify-center border border-white/10 transition-colors z-10">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <div id="carouselDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10"></div>
+            </div>
+        </div>
+
+        <!-- Secondary Block (Screamer Card) -->
+        <div class="relative w-full rounded-md overflow-hidden bg-black border border-cardBorder/80 shadow-2xl px-6 py-4 sm:px-8 sm:py-5 min-h-[180px] flex items-center justify-center">
+            <img src="smoke.png" class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none" alt="Дым">
+
+            <div class="relative z-10 max-w-3xl w-full flex flex-col md:flex-row items-center justify-between gap-6 my-auto">
+                <div class="space-y-2.5 max-w-md text-left">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">ВАШ вопрос прямо в игре!</h2>
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
+                        Вы можете помочь нам разбавить игру, прислав свой вопрос на специальный форум.
+                    </p>
+                    <div class="pt-1">
+                        <button onclick="openApplyModal()" class="px-4 py-2 border border-gray-700/80 hover:border-gray-500 bg-black/40 hover:bg-black/80 text-gray-200 hover:text-white text-xs sm:text-sm rounded-md transition-all">
+                            Помочь с вопросами
+                        </button>
                     </div>
-                    <div class="pt-2">
-                        <a href="https://discord.gg" target="_blank" class="w-full bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 font-semibold text-xs py-2.5 rounded-sm transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-discord"></i> Обсудить в Discord
-                        </a>
+                </div>
+
+                <div class="relative shrink-0 w-24 sm:w-32 flex justify-center items-center">
+                    <img src="Screamer.png" alt="Screamer" 
+                         class="w-full h-auto max-h-32 object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] transform rotate-[5deg] transition-transform duration-300 hover:rotate-[15deg] hover:scale-105"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordion Credits Block -->
+        <div class="w-full">
+            <button onclick="toggleCredits()" id="creditsToggleBtn" class="w-full bg-cardBg hover:bg-cardHover border border-cardBorder text-white font-extrabold text-base sm:text-xl py-4 sm:py-5 px-6 sm:px-8 rounded-sm transition-all flex items-center justify-between shadow-xl group cursor-pointer tracking-wide">
+                <span class="flex items-center gap-3 sm:gap-4">
+                    <i class="fa-solid fa-users text-tjmRed text-xl sm:text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span>Над проектом работали</span>
+                </span>
+                <i id="creditsArrow" class="fa-solid fa-chevron-down text-lg sm:text-xl text-gray-400 group-hover:text-white transition-transform duration-300"></i>
+            </button>
+
+            <!-- Wrapper for Smooth Animation -->
+            <div id="creditsWrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-in-out">
+                <div class="overflow-hidden">
+                    <div id="creditsContent" class="mt-3 bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 shadow-2xl space-y-6">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
+                            
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Мод разработан</h3>
+                                <p class="text-gray-200 font-semibold">Tiny Jack Mods</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Работа с графикой</h3>
+                                <p class="text-gray-300">Захар «RSA» Голубенко, Hardi, Puskanyaww, Shon</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Технические редакторы</h3>
+                                <p class="text-gray-300">Захар «RSA» Голубенко, Hardi, Hidsky41</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Глава по части добавления вопросов</h3>
+                                <p class="text-gray-300">Альберт Клявин</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Идея названия «Сдохлыст»</h3>
+                                <p class="text-gray-300">Puskanyaww</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Музыка и работа с озвучкой</h3>
+                                <p class="text-gray-300">Hardi</p>
+                            </div>
+
+                            <div class="space-y-1 md:col-span-2 lg:col-span-3">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Редакторы субтитров</h3>
+                                <p class="text-gray-300">KrutoiGrib, Альберт Клявин, BodyBuilderChimp, Mashina M, Hardi, Danyax, Hidsky41, Jax20114</p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Ведущий</h3>
+                                <p class="text-gray-300">[ЗАЦЕНЗУРЕНО] <span class="text-gray-500 italic text-xs">(Уж точно не Hardi)</span></p>
+                            </div>
+
+                            <div class="space-y-1 md:col-span-2">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Озвучка ролей</h3>
+                                <ul class="text-gray-300 space-y-0.5 list-disc list-inside">
+                                    <li>Игорь «admin4ik» Губанов — <span class="text-gray-400">Грег</span></li>
+                                    <li>Деревянко Ярослав — <span class="text-gray-400">Ведущий Сдохлыста</span></li>
+                                    <li>Роман «RomanFresko» — <span class="text-gray-400">Детектив Шариков</span></li>
+                                    <li>DorMyd (dankar1000) — <span class="text-gray-400">Бомж</span></li>
+                                    <li>Денис «ddenya» — <span class="text-gray-400">Мр.Л.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-1 md:col-span-2 lg:col-span-3">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Дополнительная озвучка</h3>
+                                <p class="text-gray-300">Асет Бейсембаев, Денис Касьянов, Павел Фомич, Драсерг</p>
+                            </div>
+							
+							<div class="space-y-1 md:col-span-2 lg:col-span-3">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">А также куча простых игроков, подаривших свои вопросы и прочий контент для игры!</h3>
+                            </div>
+
+                            <div class="space-y-1 md:col-span-2 lg:col-span-3 border-t border-cardBorder/60 pt-4">
+                                <h3 class="text-tjmYellow font-bold uppercase tracking-wider text-xs">Особая благодарность</h3>
+                                <p class="text-gray-300">Альберт Клявин, Александр Стоянов, Захар «RSA» Голубенко, Hidsky41</p>
+                            </div>
+
+                            <div class="space-y-2 md:col-span-2 lg:col-span-3 border-t border-cardBorder/60 pt-4">
+                                <h3 class="text-tjmRed font-bold uppercase tracking-wider text-xs">Покойтесь с миром</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-400">
+                                    <div class="bg-darkBg/60 p-3 rounded border border-cardBorder/40">
+                                        <span class="text-gray-200 font-semibold block">Илья «Darksim» Поляков (20XX – 2022)</span>
+                                        Модератор сервера What If? в Discord и просто хороший человек.
+                                    </div>
+                                    <div class="bg-darkBg/60 p-3 rounded border border-cardBorder/40">
+                                        <span class="text-gray-200 font-semibold block">Захар «RSA» Голубенко (2009 – 2025)</span>
+                                        Главный графист команды Tiny Jack Mods. Ты ушёл очень рано, но память о тебе останется навсегда...
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 
+    <!-- Footer -->
     <footer class="w-full max-w-5xl mx-auto px-4 mt-12 mb-8">
         <div class="bg-cardBg border border-cardBorder rounded-sm py-1 px-4 sm:px-6 shadow-xl flex justify-center">
             <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-12 text-xs text-gray-400 w-full">
                 <div class="flex items-center shrink-0 -my-6">
-                    <a href="../../index.html" class="block">
+                    <button type="button" onclick="scrollToTop()" class="block cursor-pointer bg-transparent border-0 p-0" title="Наверх">
                         <img src="../../tjmlogo.png" alt="Tiny Jack Mods Logo"
                              class="h-24 sm:h-28 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
                              onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
                         <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
-                    </a>
+                    </button>
                 </div>
                 <div class="space-y-1">
                     <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
+                    <div><a href="../../index.html" class="hover:text-white transition-colors">Главная</a></div>
                     <div><a href="../../index.html#projects-list" class="hover:text-white transition-colors">Проекты</a></div>
-                    <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
+                    <div><a href="../../Login/index.html" class="hover:text-white transition-colors">Привязать Steam</a></div>
                 </div>
                 <div class="space-y-1.5">
                     <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
@@ -136,7 +299,7 @@
         </div>
     </footer>
 
-    <!-- Модалки и тост — те же -->
+    <!-- Modals -->
     <div id="applyModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
             <button onclick="closeModal('applyModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -154,21 +317,70 @@
         </div>
     </div>
 
-    <div id="discordModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 max-w-sm w-full shadow-2xl relative text-center">
-            <button onclick="closeModal('discordModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-sm flex items-center justify-center text-3xl mx-auto mb-4 border border-indigo-500/30"><i class="fa-brands fa-discord"></i></div>
-            <h3 class="text-xl font-bold text-white mb-1.5">Привязать Discord</h3>
-            <p class="text-xs text-gray-400 mb-6 leading-relaxed">Авторизуйтесь через Discord для получения ролей тестировщика и синхронизации статусов на сервере Tiny Jack Mods.</p>
-            <button id="discordAuthBtn" onclick="simulateDiscordAuth()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-sm transition-all text-sm flex items-center justify-center gap-2 shadow-lg"><i class="fa-brands fa-discord"></i><span>Войти через Discord</span></button>
-        </div>
-    </div>
-
     <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white px-4 py-3 rounded-sm shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 transform translate-y-4 pointer-events-none z-50 border border-emerald-400/30">
         <i class="fa-solid fa-circle-check text-lg"></i>
         <span id="toastMessage" class="text-xs sm:text-sm font-medium">Действие выполнено!</span>
     </div>
 
     <script src="../../common.js"></script>
+    <script>
+    const totalSlides = 5;
+    let currentSlide = 0;
+
+    function renderDots() {
+        const container = document.getElementById('carouselDots');
+        if (!container) return;
+        container.innerHTML = Array.from({ length: totalSlides }).map((_, i) => `
+            <span onclick="goToSlide(${i})" class="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${i === currentSlide ? 'bg-white scale-125 opacity-100' : 'bg-white opacity-40 hover:opacity-75'}"></span>
+        `).join('');
+    }
+
+    function updateSlider() {
+        const track = document.getElementById('carouselTrack');
+        if (!track) return;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        renderDots();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+    }
+
+    function toggleCredits() {
+        const wrapper = document.getElementById('creditsWrapper');
+        const arrow = document.getElementById('creditsArrow');
+        
+        if (wrapper.classList.contains('grid-rows-[1fr]')) {
+            wrapper.classList.remove('grid-rows-[1fr]');
+            wrapper.classList.add('grid-rows-[0fr]');
+            arrow.classList.remove('rotate-180');
+        } else {
+            wrapper.classList.remove('grid-rows-[0fr]');
+            wrapper.classList.add('grid-rows-[1fr]');
+            arrow.classList.add('rotate-180');
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderDots();
+        updateSlider();
+    });
+    </script>
 </body>
 </html>

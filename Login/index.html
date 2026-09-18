@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация через Steam — Tiny Jack Mods</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {
+                colors: {
+                    darkBg: '#0b0b0d', cardBg: '#151518', cardHover: '#1b1b1f',
+                    cardBorder: '#27272e', tjmRed: '#e62335', tjmYellow: '#ffd000', tjmCyan: '#00f0ff'
+                },
+                fontFamily: { sans: ['Montserrat', 'sans-serif'] }
+            }}
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white bg-darkBg text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 group">
+                <div class="flex items-center -my-8">
+                    <img src="../tjmlogo.png" alt="TJM Logo"
+                         class="h-20 sm:h-24 w-auto object-contain filter grayscale contrast-200 brightness-200 transition-transform group-hover:scale-105"
+                         onerror="this.style.display='none'; document.getElementById('navLogoText').classList.remove('hidden')">
+                    <div id="navLogoText" class="hidden font-black text-2xl tracking-tighter flex items-center text-white group-hover:text-gray-300 transition-colors">TJM</div>
+                </div>
+            </a>
+            <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                <a href="../index.html" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Главная</a>
+                <a href="../index.html#projects-list" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Проекты</a>
+                <a href="index.html" id="steamNavBtn" class="bg-cardBg hover:bg-slate-800 border border-cardBorder hover:border-gray-500 text-gray-200 hover:text-white px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-steam text-base text-gray-300"></i>
+                    <span id="steamNavText">Привязать Steam</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl mx-auto px-4 py-8 sm:py-12 flex-1 space-y-6">
+
+        <!-- Главный заголовок -->
+        <div class="text-center space-y-1.5">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Авторизация через Steam</h1>
+            <p class="text-xs sm:text-sm text-gray-400">Войдите в аккаунт для проверки наличия поддерживаемых игр</p>
+        </div>
+
+        <!-- Блок входа через Steam -->
+        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 shadow-xl text-center space-y-5">
+            <div class="space-y-1">
+                <h2 class="text-lg sm:text-xl font-bold text-white flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-steam text-2xl"></i> Steam
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-300">
+                    Выполните вход, чтобы получить доступ к загрузкам.
+                </p>
+            </div>
+
+            <!-- Кнопка Входа без синей рамки -->
+            <div class="pt-1 flex justify-center">
+                <button onclick="loginWithSteam()" class="inline-flex items-center justify-center transition-opacity hover:opacity-80 cursor-pointer">
+                    <img src="https://community.cloudflare.steamstatic.com/public/images/signinthroughsteam/sits_01.png" alt="Sign in through STEAM" class="h-9 object-contain">
+                </button>
+            </div>
+
+            <p class="text-[11px] text-gray-500">
+                This site is not associated with Valve Corp.
+            </p>
+        </div>
+
+        <!-- Секция ЧАВО / FAQ -->
+        <div class="bg-cardBg border border-cardBorder rounded-sm p-5 sm:p-6 shadow-xl space-y-4">
+            <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-cardBorder pb-3">
+                <i class="fa-solid fa-circle-question text-gray-400"></i> Часто задаваемые вопросы
+            </h2>
+
+            <div class="space-y-3 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <div class="space-y-1">
+                    <div class="font-semibold text-white">Зачем нужна авторизация?</div>
+                    <p class="text-gray-400 text-xs">Модификации доступны для скачивания только владельцам лицензионных версий игр в Steam.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="font-semibold text-white">Это безопасно?</div>
+                    <p class="text-gray-400 text-xs">Вход происходит через официальный сервис Steam OpenID. Мы не получаем доступ к вашему логину или паролю.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl mx-auto px-4 mt-12 mb-8">
+        <div class="bg-cardBg border border-cardBorder rounded-sm py-1 px-4 sm:px-6 shadow-xl flex justify-center">
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-12 text-xs text-gray-400 w-full">
+                <div class="flex items-center shrink-0 -my-6">
+                    <a href="../index.html" class="block cursor-pointer bg-transparent border-0 p-0" title="На главную">
+                        <img src="../tjmlogo.png" alt="Tiny Jack Mods Logo"
+                             class="h-24 sm:h-28 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
+                             onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
+                        <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
+                    </a>
+                </div>
+                <div class="space-y-1">
+                    <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
+                    <div><a href="../index.html#projects-list" class="hover:text-white transition-colors">Проекты</a></div>
+                    <div><a href="index.html" class="hover:text-white transition-colors">Привязать Steam</a></div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
+                    <div class="flex items-center gap-2">
+                        <a href="https://youtube.com/@TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-youtube text-sm"></i></a>
+                        <a href="https://discord.com/invite/Bn3CRuSKam" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-discord text-sm"></i></a>
+                        <a href="https://t.me/TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-solid fa-paper-plane text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-gray-400 font-semibold">Создание сайта</div>
+                    <a href="https://www.youtube.com/@hardi35" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@hardi35</a>
+                </div>
+                <div class="text-gray-400 text-left font-normal leading-tight">Not associated with<br>Jackbox Games</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const referrer = document.referrer;
+            if (referrer && !referrer.includes('/Login/') && referrer !== window.location.href) {
+                sessionStorage.setItem('tjm_return_url', referrer);
+            }
+
+            // Проверяем статус при загрузке для кнопки в шапке
+            const steamUser = JSON.parse(localStorage.getItem('steamUser') || 'null');
+            const steamNavText = document.getElementById('steamNavText');
+            if (steamUser && steamUser.isLoggedIn && steamNavText) {
+                steamNavText.textContent = steamUser.name || 'Steam Профиль';
+            }
+        });
+
+        function loginWithSteam() {
+            // Сохраняем адрес, откуда пришел пользователь
+            const referrer = document.referrer;
+            if (referrer && !referrer.includes('/Login/')) {
+                sessionStorage.setItem('tjm_return_url', referrer);
+            }
+            
+            // Перенаправляем на запущенный сервер Node.js
+            window.location.href = 'http://localhost:3000/api/auth/steam';
+        }
+    </script>
+</body>
+</html>

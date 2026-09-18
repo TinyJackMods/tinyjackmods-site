@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль Steam — Tiny Jack Mods</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {
+                colors: {
+                    darkBg: '#0b0b0d', cardBg: '#151518', cardHover: '#1b1b1f',
+                    cardBorder: '#27272e', tjmRed: '#e62335', tjmYellow: '#ffd000', tjmCyan: '#00f0ff'
+                },
+                fontFamily: { sans: ['Montserrat', 'sans-serif'] }
+            }}
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white bg-darkBg text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 group">
+                <div class="flex items-center -my-8">
+                    <img src="../tjmlogo.png" alt="TJM Logo" class="h-20 sm:h-24 w-auto object-contain filter grayscale contrast-200 brightness-200 transition-transform group-hover:scale-105" onerror="this.style.display='none'; document.getElementById('navLogoText').classList.remove('hidden')">
+                    <div id="navLogoText" class="hidden font-black text-2xl tracking-tighter flex items-center text-white group-hover:text-gray-300 transition-colors">TJM</div>
+                </div>
+            </a>
+            <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                <a href="../index.html" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Главная</a>
+                <a href="../index.html#projects-list" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Проекты</a>
+                <a href="index.html" id="steamNavBtn" class="bg-cardBg hover:bg-slate-800 border border-cardBorder hover:border-gray-500 text-gray-200 hover:text-white px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-steam text-base text-gray-300"></i>
+                    <span id="steamNavText">Steam Профиль</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto px-4 py-8 sm:py-12 flex-1 space-y-6">
+        <div class="text-center space-y-1.5">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Личный кабинет Steam</h1>
+            <p class="text-xs sm:text-sm text-gray-400">Информация о вашем аккаунте и коллекции игр Jackbox</p>
+        </div>
+
+        <!-- Карточка профиля -->
+        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 shadow-xl space-y-6">
+            <div class="flex items-center justify-between border-b border-cardBorder pb-5">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full bg-emerald-950/60 border border-emerald-500/50 flex items-center justify-center text-emerald-400 text-2xl">
+                        <i class="fa-brands fa-steam"></i>
+                    </div>
+                    <div>
+                        <h2 id="profileName" class="text-lg sm:text-xl font-bold text-white">Загрузка...</h2>
+                        <p class="text-xs text-gray-400">Steam ID: <span id="profileSteamId" class="text-gray-300 font-mono">-</span></p>
+                    </div>
+                </div>
+                <button onclick="logoutSteam()" class="text-xs bg-red-950/40 hover:bg-red-900/40 border border-red-500/30 text-red-400 px-3 py-2 rounded-sm transition-colors cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Выйти
+                </button>
+            </div>
+
+            <!-- Игры на аккаунте -->
+            <div class="space-y-4">
+                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider">Обнаруженные игры:</h3>
+                
+                <!-- Сетка игр -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    
+                    <!-- JPP 1 -->
+                    <div id="gameCardJPP1" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP1.png" alt="The Jackbox Party Pack" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack">The Jackbox Party Pack</div>
+                            <div id="statusJPP1" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 2 -->
+                    <div id="gameCardJPP2" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP2.png" alt="The Jackbox Party Pack 2" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 2">The Jackbox Party Pack 2</div>
+                            <div id="statusJPP2" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 3 -->
+                    <div id="gameCardJPP3" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP3.png" alt="The Jackbox Party Pack 3" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 3">The Jackbox Party Pack 3</div>
+                            <div id="statusJPP3" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 4 -->
+                    <div id="gameCardJPP4" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP4.png" alt="The Jackbox Party Pack 4" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 4">The Jackbox Party Pack 4</div>
+                            <div id="statusJPP4" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 5 -->
+                    <div id="gameCardJPP5" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP5.png" alt="The Jackbox Party Pack 5" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 5">The Jackbox Party Pack 5</div>
+                            <div id="statusJPP5" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 6 -->
+                    <div id="gameCardJPP6" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP6.png" alt="The Jackbox Party Pack 6" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 6">The Jackbox Party Pack 6</div>
+                            <div id="statusJPP6" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 7 -->
+                    <div id="gameCardJPP7" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP7.png" alt="The Jackbox Party Pack 7" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 7">The Jackbox Party Pack 7</div>
+                            <div id="statusJPP7" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 8 -->
+                    <div id="gameCardJPP8" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP8.png" alt="The Jackbox Party Pack 8" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 8">The Jackbox Party Pack 8</div>
+                            <div id="statusJPP8" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- The Jackbox Party Starter -->
+                    <div id="gameCardJPS" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPS.png" alt="The Jackbox Party Starter" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Starter">The Jackbox Party Starter</div>
+                            <div id="statusJPS" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 9 -->
+                    <div id="gameCardJPP9" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP9.png" alt="The Jackbox Party Pack 9" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 9">The Jackbox Party Pack 9</div>
+                            <div id="statusJPP9" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- JPP 10 -->
+                    <div id="gameCardJPP10" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JPP10.png" alt="The Jackbox Party Pack 10" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Party Pack 10">The Jackbox Party Pack 10</div>
+                            <div id="statusJPP10" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                    <!-- The Jackbox Naughty Pack -->
+                    <div id="gameCardJNP" class="bg-darkBg border border-cardBorder rounded-sm p-3 flex flex-col items-center text-center space-y-2 transition-all">
+                        <div class="w-full aspect-[3/4] rounded-sm bg-black/40 overflow-hidden border border-cardBorder flex items-center justify-center relative">
+                            <img src="JNP.png" alt="The Jackbox Naughty Pack" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="w-full h-full items-center justify-center text-gray-500 text-2xl hidden"><i class="fa-solid fa-gamepad"></i></div>
+                        </div>
+                        <div class="w-full space-y-0.5">
+                            <div class="font-semibold text-[11px] leading-tight text-white line-clamp-2 h-7 flex items-center justify-center" title="The Jackbox Naughty Pack">The Jackbox Naughty Pack</div>
+                            <div id="statusJNP" class="text-[10px] text-gray-400 font-medium">Не найдено</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl mx-auto px-4 mt-12 mb-8">
+        <div class="bg-cardBg border border-cardBorder rounded-sm py-1 px-4 sm:px-6 shadow-xl flex justify-center">
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-12 text-xs text-gray-400 w-full">
+                <div class="flex items-center shrink-0 -my-6">
+                    <a href="../index.html" class="block cursor-pointer bg-transparent border-0 p-0" title="На главную">
+                        <img src="../tjmlogo.png" alt="Tiny Jack Mods Logo" class="h-24 sm:h-28 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform" onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.add('flex');">
+                        <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
+                    </a>
+                </div>
+                <div class="space-y-1">
+                    <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
+                    <div><a href="../index.html#projects-list" class="hover:text-white transition-colors">Проекты</a></div>
+                    <div><a href="index.html" class="hover:text-white transition-colors">Steam Профиль</a></div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
+                    <div class="flex items-center gap-2">
+                        <a href="https://youtube.com/@TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-youtube text-sm"></i></a>
+                        <a href="https://discord.com/invite/Bn3CRuSKam" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-discord text-sm"></i></a>
+                        <a href="https://t.me/TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-solid fa-paper-plane text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-gray-400 font-semibold">Создание сайта</div>
+                    <a href="https://www.youtube.com/@hardi35" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@hardi35</a>
+                </div>
+                <div class="text-gray-400 text-left font-normal leading-tight">Not associated with<br>Jackbox Games</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userStr = localStorage.getItem('steamUser');
+            if (!userStr) {
+                window.location.href = '../Login/index.html';
+                return;
+            }
+            const user = JSON.parse(userStr);
+            
+            document.getElementById('profileName').textContent = user.name || 'Игрок Steam';
+            document.getElementById('profileSteamId').textContent = user.steamId || 'Не указан';
+
+            // Карта соответствия AppID Steam и ключей ваших карточек
+            const steamAppIdMap = {
+                331670: 'JPP1',
+                434170: 'JPP2',
+                386940: 'JPP3',
+                612630: 'JPP4',
+                774801: 'JPP5',
+                1005240: 'JPP6',
+                1211600: 'JPP7',
+                1552350: 'JPP8',
+                1832600: 'JPS',
+                1850960: 'JPP9',
+                1982630: 'JPP10',
+                2611710: 'JNP'
+            };
+
+            let userGameKeys = [];
+
+            // Проверяем, в каком формате Steam прислал список игр
+            if (Array.isArray(user.games)) {
+                user.games.forEach(game => {
+                    // Извлекаем AppID (если пришел объект вида { appid: 331670 } или просто число 331670)
+                    const appId = (typeof game === 'object' && game !== null) ? game.appid : game;
+                    
+                    if (steamAppIdMap[appId]) {
+                        userGameKeys.push(steamAppIdMap[appId]);
+                    } else if (typeof game === 'string') {
+                        userGameKeys.push(game);
+                    }
+                });
+            }
+
+            // Подсвечиваем карточки игр на странице
+            userGameKeys.forEach(gameKey => {
+                const card = document.getElementById('gameCard' + gameKey);
+                const status = document.getElementById('status' + gameKey);
+                if (card && status) {
+                    card.classList.add('border-emerald-500/40', 'bg-emerald-950/20');
+                    status.className = 'text-[10px] text-emerald-400 font-medium';
+                    status.textContent = 'Есть на аккаунте';
+                }
+            });
+        });
+
+        function logoutSteam() {
+            localStorage.removeItem('steamUser');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

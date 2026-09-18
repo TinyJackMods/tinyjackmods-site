@@ -1,3 +1,42 @@
+// ============ LENIS — инерционная прокрутка ============
+(function initLenis() {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/lenis@1.1.14/dist/lenis.min.js';
+    script.onload = () => {
+        const lenis = new Lenis({
+            duration: 0.9,            // было 1.4 — короче инерция, легче ощущение
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,        // инерция от колеса мыши
+            wheelMultiplier: 1,       // было 0.9 — стандартная отзывчивость колеса
+            smoothTouch: false,
+            touchMultiplier: 1.5
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        window.scrollToTop = () => lenis.scrollTo(0, { duration: 0.9 });
+
+        // Плавная прокрутка к якорям
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+            const id = link.getAttribute('href').slice(1);
+            if (!id) return;
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -80, duration: 0.9 });
+        });
+
+        document.documentElement.classList.add('lenis');
+    };
+    document.head.appendChild(script);
+})();
+
 // ===== Модалки =====
 function openApplyModal() {
     document.getElementById('applyModal').classList.remove('hidden');
@@ -58,7 +97,7 @@ window.addEventListener('click', function(event) {
     });
 });
 
-// ===== Анимация дыма на canvas (только если он есть на странице) =====
+// ===== Анимация дыма на canvas =====
 window.addEventListener('load', function() {
     const canvas = document.getElementById('smokeCanvas');
     if (!canvas) return;
@@ -102,3 +141,30 @@ window.addEventListener('load', function() {
     }
     animateSmoke();
 });
+document.addEventListener("DOMContentLoaded", () => {
+    checkSteamAuth();
+});
+
+function checkSteamAuth() {
+    const steamUserStr = localStorage.getItem('steamUser');
+    const steamBtn = document.getElementById('steamNavBtn');
+    const steamText = document.getElementById('steamNavText');
+
+    if (!steamBtn || !steamText) return;
+
+    try {
+        const steamUser = steamUserStr ? JSON.parse(steamUserStr) : null;
+
+        if (steamUser && steamUser.isLoggedIn) {
+            steamText.textContent = steamUser.name || 'Steam Профиль';
+            steamBtn.classList.remove('bg-cardBg', 'border-cardBorder', 'text-gray-200');
+            steamBtn.classList.add('bg-emerald-950/40', 'border-emerald-500/50', 'text-emerald-300');
+            
+            // Используем абсолютный путь от корня сервера, чтобы ссылка работала с любой страницы!
+            steamBtn.href = '/Profile/index.html';
+            steamBtn.onclick = null;
+        }
+    } catch (e) {
+        console.error('Ошибка чтения данных Steam из localStorage:', e);
+    }
+}

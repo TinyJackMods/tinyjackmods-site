@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark scroll-smooth">
+<html lang="ru" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
         }
     </script>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white bg-darkBg text-white">
 
     <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
         <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -37,10 +37,11 @@
             </a>
             <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
                 <a href="index.html" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Главная</a>
-                <a href="#projects-list" class="text-gray-200 hover:text-white transition-colors py-1.5 px-3.5 bg-cardBg rounded-sm border border-cardBorder hover:border-gray-500">Проекты</a>
-                <button id="discordNavBtn" onclick="openDiscordModal()" class="bg-cardBg hover:bg-indigo-950/40 border border-cardBorder hover:border-indigo-500/60 text-gray-200 hover:text-indigo-300 px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
-                    <span id="discordNavText">Привязать Discord</span>
-                </button>
+                <a href="#projects-list" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Проекты</a>
+                <a href="Login/index.html" id="steamNavBtn" class="bg-cardBg hover:bg-slate-800 border border-cardBorder hover:border-gray-500 text-gray-200 hover:text-white px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-steam text-base text-gray-300"></i>
+                    <span id="steamNavText">Привязать Steam</span>
+                </a>
             </nav>
         </div>
     </header>
@@ -73,72 +74,64 @@
         </div>
 
         <!-- Projects -->
-        <div id="projects-list" class="my-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white mb-5 flex items-center gap-2"><span>Наши проекты</span></h2>
+        <div id="projects-list" class="my-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">Наши проекты</h2>
 
-            <div class="bg-cardBg border border-cardBorder rounded-sm p-4 sm:p-6 space-y-6 shadow-xl">
+            <div class="bg-cardBg border border-cardBorder rounded-sm p-3 sm:p-4 space-y-4 shadow-xl">
 
-                <!-- Project 1 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
-                    <div class="md:col-span-5 h-48 sm:h-56 poster-trivia rounded-sm overflow-hidden flex items-center justify-center relative group shadow-lg">
+                <!-- Project 1: TMP2CE -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <div class="sm:col-span-5 aspect-[16/9] w-full rounded-sm overflow-hidden relative group shadow bg-black/40 border border-cardBorder/50 shrink-0">
                         <img src="TMP2CELOGO.png" alt="Смертельная Вечеринка 2 Community Edition"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                             onerror="this.style.display='none'; document.getElementById('posterFallbackTMP2').classList.remove('hidden');">
-                        <div id="posterFallbackTMP2" class="hidden relative z-10 flex flex-col items-center p-4 text-center">
-                            <span class="text-[10px] uppercase tracking-widest text-red-300 font-bold px-2 py-0.5 rounded-sm bg-red-950/80 mb-2">Модификация</span>
-                            <h3 class="text-xl sm:text-2xl font-black text-red-600 uppercase tracking-wider">
-                                СМЕРТЕЛЬНАЯ<br><span class="text-white">ВЕЧЕРИНКА</span> <span class="text-tjmYellow">2</span>
-                            </h3>
-                            <div class="mt-2 text-xs font-black bg-tjmRed text-white py-1 px-3 rounded-sm transform -rotate-2">COMMUNITY EDITION</div>
-                        </div>
+                             onerror="this.style.display='none';">
                     </div>
 
-                    <div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+                    <div class="sm:col-span-7 flex flex-col justify-between h-full space-y-2 py-0.5">
                         <div>
-                            <a href="Projects/TMP2CE/" class="block text-2xl sm:text-3xl font-bold text-white mb-3 hover:text-tjmRed transition-colors">
+                            <a href="Projects/TMP2CE/index.html" class="block text-lg sm:text-xl font-bold text-white mb-1.5 hover:text-tjmRed transition-colors">
                                 Смертельная Вечеринка 2: Community Edition
                             </a>
-                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
-                                Модификация на игру "Смертельная вечеринка 2" из Jackbox Party Pack 6 и Jackbox Party Starter. Добавляет новые вопросы, заменяет реплики ведущего и вносит усложнения в некоторые мини-игры! Главной идеей мода является то, что абсолютно каждый может предложить свой вопрос для игры.
+                            <p class="text-gray-300 text-xs sm:text-sm leading-snug font-normal">
+                                Модификация для игры «Смертельная вечеринка 2» из Jackbox Party Pack 6 и Jackbox Party Starter. Добавляет новые вопросы, заменяет реплики ведущего и вносит усложнения в некоторые мини-игры! Главной идеей мода является то, что абсолютно каждый может предложить свой вопрос для игры.
                             </p>
                         </div>
-                        <div class="flex flex-wrap items-center gap-3 pt-2">
-                            <button onclick="openApplyModal()" class="bg-white hover:bg-gray-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-sm transition-all flex items-center gap-2 shadow-md hover:scale-105 active:scale-95">Подать заявку</button>
-                            <a href="Projects/TMP2CE/" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-sm transition-all flex items-center gap-1.5">
+                        <div class="flex flex-wrap items-center gap-2 pt-1">
+                            <a href="Download/TMP2CE/index.html" class="bg-white hover:bg-gray-200 text-black font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all shadow-sm">
+                                Скачать модификацию
+                            </a>
+                            <button onclick="openApplyModal()" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all">
+                                Предложить вопрос
+                            </button>
+                            <a href="Projects/TMP2CE/index.html" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all flex items-center gap-1">
                                 Перейти на страницу <span class="text-gray-400">›</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="border-b border-cardBorder/60 my-2"></div>
-
-                <!-- Project 2 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-2 sm:p-4">
-                    <div class="md:col-span-5 h-48 sm:h-56 poster-rhymes rounded-sm overflow-hidden flex items-center justify-center relative group shadow-lg">
+                <!-- Project 2: GVR -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <div class="sm:col-span-5 aspect-[16/9] w-full rounded-sm overflow-hidden relative group shadow bg-black/40 border border-cardBorder/50 shrink-0">
                         <img src="GKRLOGO.png" alt="Город Видимых Рифм"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                             onerror="this.style.display='none'; document.getElementById('posterFallbackGKR').classList.remove('hidden');">
-                        <div id="posterFallbackGKR" class="hidden relative z-10 flex flex-col items-center p-4 text-center">
-                            <span class="text-[10px] uppercase tracking-widest text-amber-300 font-bold px-2.5 py-0.5 rounded-sm bg-amber-950/80 mb-2 inline-block">Модификация</span>
-                            <h3 class="text-2xl sm:text-3xl font-black text-amber-400 uppercase tracking-tight">
-                                ГОРОД<br><span class="text-amber-100">ВИДИМЫХ</span><br><span class="text-white">РИФМ</span>
-                            </h3>
-                        </div>
+                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                             onerror="this.style.display='none';">
                     </div>
 
-                    <div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+                    <div class="sm:col-span-7 flex flex-col justify-between h-full space-y-2 py-0.5">
                         <div>
-                            <a href="Projects/GVR/" class="block text-2xl sm:text-3xl font-bold text-white mb-3 hover:text-tjmYellow transition-colors">
+                            <a href="Projects/GVR/index.html" class="block text-lg sm:text-xl font-bold text-white mb-1.5 hover:text-tjmYellow transition-colors">
                                 Город Видимых Рифм
                             </a>
-                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
-                                Функция для игры "Город Злых Рифм" из Jackbox Party Pack 5. Позволяет заранее увидеть первую и третью строчки текстов, чтобы было легче придумать подходящее слово для рифмы.
+                            <p class="text-gray-300 text-xs sm:text-sm leading-snug font-normal">
+                                Функция для игры «Город Злых Рифм» из Jackbox Party Pack 5. Позволяет заранее увидеть первую и третью строчки текстов, чтобы было легче придумать подходящее слово для рифмы.
                             </p>
                         </div>
-                        <div class="flex flex-wrap items-center gap-3 pt-2">
-                            <button onclick="downloadMod('Город Видимых Рифм')" class="bg-white hover:bg-gray-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-sm transition-all flex items-center gap-2 shadow-md hover:scale-105 active:scale-95">Скачать модификацию</button>
-                            <a href="Projects/GVR/" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-sm transition-all flex items-center gap-1.5">
+                        <div class="flex flex-wrap items-center gap-2 pt-1">
+                            <a href="Download/GVR/index.html" class="bg-white hover:bg-gray-200 text-black font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all shadow-sm">
+                                Скачать функцию
+                            </a>
+                            <a href="Projects/GVR/index.html" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all flex items-center gap-1">
                                 Перейти на страницу <span class="text-gray-400">›</span>
                             </a>
                         </div>
@@ -147,6 +140,121 @@
 
             </div>
         </div>
+
+        <!-- Published Projects -->
+        <div id="published-projects" class="my-8">
+            <div class="flex items-center gap-2 mb-3">
+                <h2 class="text-xl sm:text-2xl font-bold text-white">Изданные проекты</h2>
+                
+                <div class="relative group inline-flex items-center">
+                    <i class="fa-solid fa-circle-question text-gray-400 hover:text-white text-base transition-colors cursor-help"></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center w-64 pointer-events-none z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                        <div class="bg-cardBg border border-cardBorder text-gray-300 text-xs p-2.5 rounded-sm shadow-2xl text-center leading-relaxed font-normal">
+                            Проекты сторонних авторов, выпущенные под издательством Tiny Jack Mods.
+                        </div>
+                        <div class="w-2 h-2 bg-cardBg border-r border-b border-cardBorder rotate-45 -mt-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-cardBg border border-cardBorder rounded-sm p-3 sm:p-4 space-y-4 shadow-xl">
+                <!-- Project 3: DDRMCE -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <div class="sm:col-span-5 aspect-[16/9] w-full rounded-sm overflow-hidden relative group shadow bg-black/40 border border-cardBorder/50 shrink-0">
+                        <img src="DDRMCELOGO.png" alt="ДоДо Ре Ми: Community Edition"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="this.style.display='none';">
+                    </div>
+
+                    <div class="sm:col-span-7 flex flex-col justify-between h-full space-y-2 py-0.5">
+                        <div>
+                            <a href="Projects/DDRMCE/index.html" class="block text-lg sm:text-xl font-bold text-white mb-1.5 hover:text-tjmYellow transition-colors">
+                                ДоДо Ре Ми: Community Edition
+                            </a>
+                            <p class="text-gray-300 text-xs sm:text-sm leading-snug font-normal">
+                                Проект, добавляющий возможность загрузить кастомные наборы песен. Главная фишка в том, что список наборов для скачивания сам автоматически обновляется, а также имеется возможность предложить СВОЙ набор песен для игры.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 pt-1">
+                            <a href="Download/DDRMCE/index.html" class="bg-white hover:bg-gray-200 text-black font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all shadow-sm">
+                                Скачать модификацию
+                            </a>
+                            <button onclick="openApplyModal()" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all">
+                                Предложить набор песен
+                            </button>
+                            <a href="Projects/DDRMCE/index.html" class="bg-transparent hover:bg-white/10 border border-gray-600 text-gray-200 hover:text-white font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm transition-all flex items-center gap-1">
+                                Перейти на страницу <span class="text-gray-400">›</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Development -->
+        <div id="in-development" class="my-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">В разработке</h2>
+
+            <div class="bg-cardBg border border-cardBorder rounded-sm p-3 sm:p-4 space-y-4 shadow-xl">
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <div class="sm:col-span-5 aspect-[16/9] w-full rounded-sm overflow-hidden relative group shadow bg-black/40 border border-cardBorder/50 shrink-0">
+                        <img src="BREXLISTLOGO.png" alt="Брехлыст"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                             onerror="this.style.display='none';">
+                    </div>
+
+                    <div class="sm:col-span-7 flex flex-col justify-between h-full space-y-2 py-0.5">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-1.5 hover:text-[#e00096] transition-colors cursor-default">
+                                Брехлыст
+                            </h3>
+                            <p class="text-gray-300 text-xs sm:text-sm leading-snug font-normal">
+                                Binjpipe представляет новую «увлекательную» игру! Придумывайте шутки на темы, которые вы точно не видели ранее, и помогите нам захв- разнообразить этот серый мир =)
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 pt-1">
+                            <button disabled class="bg-gray-800/80 border border-gray-700/80 text-gray-400 font-semibold text-xs sm:text-sm px-4 py-1.5 rounded-sm cursor-not-allowed flex items-center gap-2 select-none">
+                                <i class="fa-solid fa-clock text-xs"></i> В разработке (скоро)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Support -->
+        <div id="support" class="my-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">Финансовая поддержка</h2>
+
+            <div class="bg-cardBg border border-cardBorder rounded-sm p-4 sm:p-6 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#f15f22]/10 via-transparent to-[#f8981d]/10 pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-4">
+                    <div class="flex items-center justify-between gap-4">
+                        <img src="BOOSTY.png" alt="Boosty" class="h-7 sm:h-9 w-auto object-contain" onerror="this.style.display='none';">
+                        <img src="DA.png" alt="DonationAlerts" class="h-7 sm:h-9 w-auto object-contain" onerror="this.style.display='none';">
+                    </div>
+
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed font-normal">
+                        Мы — простые энтузиасты, которые делают проекты ради веселья, поэтому сами мы ничего не зарабатываем. Будем очень признательны, если захотите поддержать нашу деятельность и творчество!
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <a href="https://boosty.to/tinyjackmods" target="_blank" rel="noopener"
+                           class="bg-gradient-to-r from-[#f15f22] to-[#ff7a45] hover:brightness-110 text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-sm transition-all flex items-center justify-center gap-2.5 shadow-md">
+                            <img src="BOOSTY.png" alt="Boosty Icon" class="h-4 sm:h-5 w-auto object-contain filter brightness-200" onerror="this.style.display='none';">
+                            <span>Подписаться на Бусти</span>
+                        </a>
+                        <a href="https://www.donationalerts.com/r/hardi35" target="_blank" rel="noopener"
+                           class="bg-gradient-to-r from-[#ea7e00] to-[#f8981d] hover:brightness-110 text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-sm transition-all flex items-center justify-center gap-2.5 shadow-md">
+                            <img src="DA.png" alt="DonationAlerts Icon" class="h-4 sm:h-5 w-auto object-contain filter brightness-200" onerror="this.style.display='none';">
+                            <span>Задонатить на DonationAlerts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -154,17 +262,17 @@
         <div class="bg-cardBg border border-cardBorder rounded-sm py-1 px-4 sm:px-6 shadow-xl flex justify-center">
             <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-12 text-xs text-gray-400 w-full">
                 <div class="flex items-center shrink-0 -my-6">
-                    <a href="index.html" class="block">
+                    <button type="button" onclick="scrollToTop()" class="block cursor-pointer bg-transparent border-0 p-0" title="Наверх">
                         <img src="tjmlogo.png" alt="Tiny Jack Mods Logo"
                              class="h-24 sm:h-28 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
                              onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
                         <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
-                    </a>
+                    </button>
                 </div>
                 <div class="space-y-1">
                     <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
                     <div><a href="index.html#projects-list" class="hover:text-white transition-colors">Проекты</a></div>
-                    <div><button onclick="openDiscordModal()" class="hover:text-white transition-colors">Привязать Discord</button></div>
+                    <div><a href="Login/index.html" class="hover:text-white transition-colors">Привязать Steam</a></div>
                 </div>
                 <div class="space-y-1.5">
                     <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
@@ -176,7 +284,7 @@
                 </div>
                 <div class="space-y-1">
                     <div class="text-gray-400 font-semibold">Создание сайта</div>
-                    <a href="https://t.me/puskanyaww" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@puskanyaww</a>
+                    <a href="https://www.youtube.com/@hardi35" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@hardi35</a>
                 </div>
                 <div class="text-gray-400 text-left font-normal leading-tight">Not associated with<br>Jackbox Games</div>
             </div>
@@ -210,18 +318,6 @@
                 </div>
                 <button type="submit" class="w-full bg-tjmRed hover:bg-red-700 text-white font-bold py-3 rounded-sm transition-all text-sm shadow-lg mt-2">Отправить предложение</button>
             </form>
-        </div>
-    </div>
-
-    <div id="discordModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-cardBorder rounded-sm p-6 sm:p-8 max-w-sm w-full shadow-2xl relative text-center">
-            <button onclick="closeModal('discordModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 rounded-sm flex items-center justify-center text-3xl mx-auto mb-4 border border-indigo-500/30"><i class="fa-brands fa-discord"></i></div>
-            <h3 class="text-xl font-bold text-white mb-1.5">Привязать Discord</h3>
-            <p class="text-xs text-gray-400 mb-6 leading-relaxed">Авторизуйтесь через Discord для получения ролей тестировщика и синхронизации статусов на сервере Tiny Jack Mods.</p>
-            <button id="discordAuthBtn" onclick="simulateDiscordAuth()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-sm transition-all text-sm flex items-center justify-center gap-2 shadow-lg">
-                <i class="fa-brands fa-discord"></i><span>Войти через Discord</span>
-            </button>
         </div>
     </div>
 

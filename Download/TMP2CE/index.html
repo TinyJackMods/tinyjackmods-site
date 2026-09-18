@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скачать Смертельная Вечеринка 2: Community Edition — Tiny Jack Mods</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {
+                colors: {
+                    darkBg: '#0b0b0d', cardBg: '#151518', cardHover: '#1b1b1f',
+                    cardBorder: '#27272e', tjmRed: '#e62335', tjmYellow: '#ffd000', tjmCyan: '#00f0ff'
+                },
+                fontFamily: { sans: ['Montserrat', 'sans-serif'] }
+            }}
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-tjmRed selection:text-white bg-darkBg text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full bg-darkBg/90 backdrop-blur-md border-b border-cardBorder/50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="../../index.html" class="flex items-center gap-2 group">
+                <div class="flex items-center -my-8">
+                    <img src="../../tjmlogo.png" alt="TJM Logo"
+                         class="h-20 sm:h-24 w-auto object-contain filter grayscale contrast-200 brightness-200 transition-transform group-hover:scale-105"
+                         onerror="this.style.display='none'; document.getElementById('navLogoText').classList.remove('hidden')">
+                    <div id="navLogoText" class="hidden font-black text-2xl tracking-tighter flex items-center text-white group-hover:text-gray-300 transition-colors">TJM</div>
+                </div>
+            </a>
+            <nav class="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                <a href="../../index.html" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Главная</a>
+                <a href="../../index.html#projects-list" class="text-gray-300 hover:text-white transition-colors py-1.5 px-3 rounded-sm hover:bg-cardBg">Проекты</a>
+                <a href="../../Login/index.html" id="steamNavBtn" class="bg-cardBg hover:bg-slate-800 border border-cardBorder hover:border-gray-500 text-gray-200 hover:text-white px-3.5 py-1.5 rounded-sm transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-steam text-base text-gray-300"></i>
+                    <span id="steamNavText">Привязать Steam</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto px-4 py-6 flex-1">
+
+        <!-- Шапка проекта -->
+        <div class="bg-cardBg border border-cardBorder rounded-sm p-4 sm:p-6 mb-6 shadow-xl flex flex-col sm:flex-row items-center gap-6">
+            <div class="w-full sm:w-64 aspect-[16/9] rounded-sm overflow-hidden border border-cardBorder/60 shrink-0 bg-black/50">
+                <img src="../../TMP2CELOGO.png" alt="Смертельная Вечеринка 2: Community Edition" class="w-full h-full object-cover" onerror="this.style.display='none';">
+            </div>
+            <div class="space-y-2 text-center sm:text-left flex-1">
+                <h1 class="text-2xl sm:text-3xl font-bold text-white">Смертельная Вечеринка 2: Community Edition</h1>
+                <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    Фанатская модификация для игры из Jackbox Party Pack 6 и Jackbox Party Starter с кастомными вопросами, новой озвучкой и усложнёнными мини-играми.
+                </p>
+            </div>
+        </div>
+
+        <!-- Контент: Сетка из 2 колонок -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- Левая колонка: Файлы и Установка -->
+            <div class="lg:col-span-8 space-y-6">
+
+                <!-- Карточка: Файлы для скачивания -->
+                <div class="bg-cardBg border border-cardBorder rounded-sm p-5 shadow-xl">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2 mb-4 border-b border-cardBorder pb-3">
+                        <i class="fa-solid fa-download text-tjmRed"></i> Файлы для скачивания
+                    </h2>
+
+                    <!-- Состояние 1: Не авторизован в Steam -->
+                    <div id="steamGateNotice" class="bg-darkBg border border-cardBorder p-6 rounded-sm text-center space-y-4">
+                        <div class="w-16 h-16 mx-auto bg-slate-900 border border-cardBorder rounded-full flex items-center justify-center text-3xl text-gray-300">
+                            <i class="fa-brands fa-steam"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="text-base font-bold text-white">Требуется проверка наличия игры</h3>
+                            <p class="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
+                                Войдите через ваш профиль Steam, чтобы подтвердить владение <strong>Jackbox Party Pack 6</strong> или <strong>Jackbox Party Starter</strong> и получить доступ к скачиванию модификации.
+                            </p>
+                        </div>
+                        <a href="../../Login/index.html" class="inline-flex items-center justify-center gap-2.5 bg-[#171a21] hover:bg-[#2a475e] text-white border border-[#2a475e] font-semibold text-xs py-2.5 px-6 rounded-sm transition-all shadow-lg">
+                            <i class="fa-brands fa-steam text-base"></i> Войти через Steam
+                        </a>
+                    </div>
+
+                    <!-- Состояние 2: Авторизован (Файлы скачивания) -->
+                    <div id="downloadFilesList" class="hidden space-y-3">
+
+                        <!-- Уведомление об авторизованном профиле -->
+                        <div class="flex items-center justify-between p-3 bg-slate-900/60 border border-cardBorder/80 rounded-sm text-xs mb-4">
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fa-brands fa-steam text-tjmCyan"></i>
+                                <span>Профиль Steam подключен: <strong id="steamAccountName" class="text-white">Пользователь</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Блок 1: Jackbox Party Pack 6 -->
+                        <div id="itemJPP6" class="hidden flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-darkBg border border-cardBorder/80 rounded-sm gap-3">
+                            <div class="flex items-center gap-3">
+                                <img src="J6ICO.png" alt="JPP6 Icon" class="w-10 h-10 object-contain shrink-0" onerror="this.style.display='none'">
+                                <div class="flex flex-col">
+                                    <div class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                                        The Jackbox Party Pack 6
+                                        <span class="text-[11px] font-semibold text-tjmRed bg-tjmRed/10 px-2 py-0.5 rounded-sm border border-tjmRed/20">v2.1</span>
+                                    </div>
+                                    <span class="text-[11px] text-gray-400 mt-0.5">Обновлено: 15.03.2026</span>
+                                </div>
+                            </div>
+                            <a href="../../Download/TMP2CE/JPP6_TMP2CE.zip" class="w-full sm:w-52 h-10 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold text-xs rounded-sm transition-all shadow-md shrink-0">
+                                <i class="fa-solid fa-file-arrow-down text-black"></i> Скачать для JPP6
+                            </a>
+                        </div>
+
+                        <!-- Блок 2: Jackbox Party Starter -->
+                        <div id="itemJPS" class="hidden flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-darkBg border border-cardBorder/80 rounded-sm gap-3">
+                            <div class="flex items-center gap-3">
+                                <img src="JSICO.png" alt="JPS Icon" class="w-10 h-10 object-contain shrink-0" onerror="this.style.display='none'">
+                                <div class="flex flex-col">
+                                    <div class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                                        The Jackbox Party Starter
+                                        <span class="text-[11px] font-semibold text-tjmYellow bg-tjmYellow/10 px-2 py-0.5 rounded-sm border border-tjmYellow/20">v1.0</span>
+                                    </div>
+                                    <span class="text-[11px] text-gray-400 mt-0.5">Обновлено: 10.03.2026</span>
+                                </div>
+                            </div>
+                            <a href="../../Download/TMP2CE/JPS_TMP2CE.zip" class="w-full sm:w-52 h-10 inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold text-xs rounded-sm transition-all shadow-md shrink-0">
+                                <i class="fa-solid fa-file-arrow-down text-black"></i> Скачать для JPS
+                            </a>
+                        </div>
+
+                        <!-- Сообщение если игры не найдены -->
+                        <div id="noGamesNotice" class="hidden p-4 bg-tjmRed/10 border border-tjmRed/30 rounded-sm text-center space-y-2">
+                            <div class="text-tjmRed font-bold text-sm"><i class="fa-solid fa-triangle-exclamation"></i> Игры не обнаружены</div>
+                            <p class="text-xs text-gray-300">
+                                На вашем Steam аккаунте не найдены игры <strong>Jackbox Party Pack 6</strong> или <strong>Jackbox Party Starter</strong>. Модификация доступна только обладателям лицензионных версий.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Карточка: Инструкция по установке -->
+                <div class="bg-cardBg border border-cardBorder rounded-sm p-5 shadow-xl">
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2 border-b border-cardBorder pb-3">
+                        <i class="fa-solid fa-list-check text-tjmYellow"></i> Инструкция по установке
+                    </h2>
+
+                    <ol class="space-y-3 text-xs sm:text-sm text-gray-300 list-decimal list-inside leading-relaxed">
+                        <li class="pl-1">
+                            Установите оригинальную игру <span class="text-white font-semibold">The Jackbox Party Pack 6</span> или <span class="text-white font-semibold">The Jackbox Party Starter</span> в Steam.
+                        </li>
+                        <li class="pl-1">
+                            Войдите через Steam выше и скачайте архив модификации под вашу версию игры.
+                        </li>
+                        <li class="pl-1">
+                            Распакуйте содержимое архива в корневую папку вашей игры с заменой файлов:
+                            <div class="mt-2 space-y-1.5">
+                                <div class="p-2.5 bg-darkBg border border-cardBorder/80 rounded-sm font-mono text-xs text-gray-400 break-all select-all">
+                                    C:\Program Files (x86)\Steam\steamapps\common\The Jackbox Party Pack 6
+                                </div>
+                                <div class="text-left font-bold text-xs text-white tracking-wider py-0.5">ИЛИ</div>
+                                <div class="p-2.5 bg-darkBg border border-cardBorder/80 rounded-sm font-mono text-xs text-gray-400 break-all select-all">
+                                    C:\Program Files (x86)\Steam\steamapps\common\The Jackbox Party Starter
+                                </div>
+                            </div>
+                        </li>
+                        <li class="pl-1">
+                            Запустите игру как обычно через Steam или прямой ярлык.
+                        </li>
+                    </ol>
+
+                    <div class="mt-4 p-3 bg-tjmYellow/10 border border-tjmYellow/30 rounded-sm text-xs text-tjmYellow flex items-start gap-2.5">
+                        <i class="fa-solid fa-circle-info text-sm mt-0.5 shrink-0"></i>
+                        <span>Также в каждом архиве будет приложен файл <strong class="underline">!!README.txt</strong> с инструкцией по установке.</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Правая колонка -->
+            <div class="lg:col-span-4 space-y-6">
+
+                <!-- Карточка: Как вернуть оригинал -->
+                <div class="bg-cardBg border border-cardBorder rounded-sm p-5 shadow-xl">
+                    <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2 border-b border-cardBorder pb-2">
+                        <i class="fa-solid fa-rotate-left text-gray-400"></i> Возврат к оригиналу
+                    </h3>
+
+                    <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                        Если вы хотите удалить мод и вернуть исходную чистую версию игры:
+                    </p>
+
+                    <ol class="space-y-2 text-xs text-gray-400 list-decimal list-inside leading-relaxed">
+                        <li>Откройте клиент <span class="text-gray-200">Steam</span>.</li>
+                        <li>Нажмите ПКМ по игре в библиотеке и выберите <span class="text-gray-200">«Свойства»</span>.</li>
+                        <li>Перейдите во вкладку <span class="text-gray-200">«Установленные файлы»</span>.</li>
+                        <li>Нажмите <span class="text-gray-200">«Проверить целостность файлов игры»</span>.</li>
+                    </ol>
+                </div>
+
+                <!-- Карточка: Дополнительные действия -->
+                <div class="bg-cardBg border border-cardBorder rounded-sm p-5 shadow-xl space-y-3">
+                    <h3 class="text-base font-bold text-white mb-2 border-b border-cardBorder pb-2">Участвовать в проекте</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Хотите добавить свой вопрос в игру? Вы можете отправить предложение прямо на нашем сайте!
+                    </p>
+                    <button onclick="openApplyModal()" class="w-full bg-transparent hover:bg-white/10 border border-gray-600 text-white font-semibold text-xs py-2 rounded-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus text-tjmRed"></i> Предложить вопрос
+                    </button>
+                    <a href="../../Projects/TMP2CE/index.html" class="w-full bg-darkBg hover:bg-cardHover border border-cardBorder text-gray-300 hover:text-white font-semibold text-xs py-2 rounded-sm transition-all flex items-center justify-center gap-2 text-center">
+                        Подробнее о моде
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl mx-auto px-4 mt-12 mb-8">
+        <div class="bg-cardBg border border-cardBorder rounded-sm py-1 px-4 sm:px-6 shadow-xl flex justify-center">
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-12 text-xs text-gray-400 w-full">
+                <div class="flex items-center shrink-0 -my-6">
+                    <a href="../../index.html" class="block cursor-pointer bg-transparent border-0 p-0" title="На главную">
+                        <img src="../../tjmlogo.png" alt="Tiny Jack Mods Logo"
+                             class="h-24 sm:h-28 w-auto object-contain filter grayscale contrast-200 brightness-200 hover:scale-105 transition-transform"
+                             onerror="this.style.display='none'; document.getElementById('footerFallbackText').classList.remove('hidden');">
+                        <span id="footerFallbackText" class="hidden text-white font-black text-2xl tracking-tighter">TJM</span>
+                    </a>
+                </div>
+                <div class="space-y-1">
+                    <div class="font-bold text-gray-200 text-xs mb-1">Навигация</div>
+                    <div><a href="../../index.html#projects-list" class="hover:text-white transition-colors">Проекты</a></div>
+                    <div><a href="../../Login/index.html" class="hover:text-white transition-colors">Привязать Steam</a></div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="font-bold text-gray-200 text-xs mb-1">@TinyJackMods</div>
+                    <div class="flex items-center gap-2">
+                        <a href="https://youtube.com/@TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-youtube text-sm"></i></a>
+                        <a href="https://discord.com/invite/Bn3CRuSKam" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-brands fa-discord text-sm"></i></a>
+                        <a href="https://t.me/TinyJackMods" target="_blank" rel="noopener" class="w-7 h-7 bg-white text-black rounded-sm flex items-center justify-center hover:opacity-80 transition-opacity"><i class="fa-solid fa-paper-plane text-xs"></i></a>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-gray-400 font-semibold">Создание сайта</div>
+                    <a href="https://www.youtube.com/@hardi35" target="_blank" rel="noopener" class="text-gray-300 hover:text-white font-medium block">@hardi35</a>
+                </div>
+                <div class="text-gray-400 text-left font-normal leading-tight">Not associated with<br>Jackbox Games</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../common.js"></script>
+    <script>
+        // Карта соответствия ключей и AppID Steam
+        const STEAM_APP_IDS = {
+            JPP6: 1005240, // The Jackbox Party Pack 6
+            JPS: 1832600   // The Jackbox Party Starter
+        };
+
+        function checkSteamAuthStatus() {
+            const steamUser = JSON.parse(localStorage.getItem('steamUser') || 'null');
+            
+            const gateNotice = document.getElementById('steamGateNotice');
+            const downloadList = document.getElementById('downloadFilesList');
+            const itemJPP6 = document.getElementById('itemJPP6');
+            const itemJPS = document.getElementById('itemJPS');
+            const noGamesNotice = document.getElementById('noGamesNotice');
+            const steamAccountName = document.getElementById('steamAccountName');
+            const steamNavText = document.getElementById('steamNavText');
+
+            if (steamUser && steamUser.isLoggedIn) {
+                gateNotice.classList.add('hidden');
+                downloadList.classList.remove('hidden');
+                steamAccountName.textContent = steamUser.name || 'Профиль Steam';
+                if (steamNavText) steamNavText.textContent = steamUser.name || 'Steam Профиль';
+
+                const games = steamUser.games || [];
+
+                // Поддерживаем проверку и числовых AppID, и строковых текстовых ключей
+                const hasJPP6 = games.includes(STEAM_APP_IDS.JPP6) || games.includes('JPP6') || games.some(g => (g.appid || g) === STEAM_APP_IDS.JPP6);
+                const hasJPS = games.includes(STEAM_APP_IDS.JPS) || games.includes('JPS') || games.some(g => (g.appid || g) === STEAM_APP_IDS.JPS);
+
+                let hasAnyGame = false;
+
+                if (hasJPP6) {
+                    itemJPP6.classList.remove('hidden');
+                    itemJPP6.classList.add('flex');
+                    hasAnyGame = true;
+                } else {
+                    itemJPP6.classList.add('hidden');
+                    itemJPP6.classList.remove('flex');
+                }
+
+                if (hasJPS) {
+                    itemJPS.classList.remove('hidden');
+                    itemJPS.classList.add('flex');
+                    hasAnyGame = true;
+                } else {
+                    itemJPS.classList.add('hidden');
+                    itemJPS.classList.remove('flex');
+                }
+
+                if (!hasAnyGame) {
+                    noGamesNotice.classList.remove('hidden');
+                } else {
+                    noGamesNotice.classList.add('hidden');
+                }
+            } else {
+                gateNotice.classList.remove('hidden');
+                downloadList.classList.add('hidden');
+                if (steamNavText) steamNavText.textContent = 'Привязать Steam';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkSteamAuthStatus);
+    </script>
+</body>
+</html>
